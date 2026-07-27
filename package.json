@@ -1,0 +1,27 @@
+{
+  "name": "cuadre-negocio-v1.5",
+  "version": "1.5.0",
+  "description": "App offline para control de caja en negocios cubanos",
+  "main": "index.html",
+  "type": "module",
+  "scripts": {
+    "start": "live-server --port=3001",
+    "dev": "live-server --port=3001 --open=index.html"
+  },
+  "keywords": [
+    "cuadre",
+    "negocio",
+    "cuba",
+    "offline",
+    "pwa"
+  ],
+  "author": "TecnoRouteV",
+  "license": "MIT",
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  },
+  "dependencies": {
+    "jspdf": "^4.2.1",
+    "jspdf-autotable": "^5.0.8"
+  }
+}

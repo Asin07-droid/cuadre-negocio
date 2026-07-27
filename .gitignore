@@ -1,0 +1,271 @@
+
+---
+
+## 📄 .gitignore
+
+```gitignore
+# ============================================
+# DEPENDENCIAS
+# ============================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# ============================================
+# ARCHIVOS DE DESARROLLO
+# ============================================
+.DS_Store
+Thumbs.db
+*.tmp
+*.swp
+*.swo
+*.swn
+*.bak
+*.log
+*.env
+*.env.local
+*.env.development
+*.env.production
+
+# ============================================
+# EDITORES
+# ============================================
+.vscode/
+.idea/
+*.iml
+*.project
+*.classpath
+*.settings/
+*.sublime-*
+*.code-workspace
+*.code-snippets
+
+# ============================================
+# CONSTRUCCIÓN Y DISTRIBUCIÓN
+# ============================================
+dist/
+build/
+out/
+*.min.js
+*.min.css
+*.bundle.js
+*.chunk.js
+
+# ============================================
+# COBERTURA DE CÓDIGO
+# ============================================
+coverage/
+*.lcov
+*.lcov.info
+.nyc_output/
+
+# ============================================
+# ARCHIVOS DE USUARIO
+# ============================================
+*.bak
+*.old
+*.orig
+*.rej
+*.patch
+*.diff
+
+# ============================================
+# ARCHIVOS DE DATOS
+# ============================================
+*.db
+*.sqlite
+*.sqlite3
+*.json
+!package.json
+!package-lock.json
+*.xlsx
+*.xls
+*.csv
+*.txt
+*.pdf
+*.zip
+*.rar
+*.7z
+
+# ============================================
+# ARCHIVOS DE LOGS
+# ============================================
+logs/
+*.log
+*.log.*
+*.log.gz
+*.log.zip
+
+# ============================================
+# ARCHIVOS DE SISTEMA
+# ============================================
+*.pid
+*.seed
+*.pid.lock
+*.pid.lock.*
+*.lck
+*.lock
+
+# ============================================
+# ARCHIVOS DE PRUEBAS
+# ============================================
+test-results/
+test/
+__tests__/
+__mocks__/
+*.test.js
+*.spec.js
+*.test.ts
+*.spec.ts
+
+# ============================================
+# ARCHIVOS DE DOCUMENTACIÓN
+# ============================================
+*.doc
+*.docx
+*.ppt
+*.pptx
+*.xls
+*.xlsx
+*.odt
+*.ods
+*.odp
+
+# ============================================
+# ARCHIVOS DE IMAGEN (generados)
+# ============================================
+*.webp
+*.avif
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.ico
+*.svg
+*.bmp
+*.tiff
+
+# ============================================
+# DEPENDENCIAS DE DESARROLLO
+# ============================================
+.parcel-cache/
+.cache/
+.next/
+.nuxt/
+.stencil/
+.vite/
+.turbo/
+.eslintcache
+.prettiercache
+.stylelintcache
+
+# ============================================
+# VARIABLES DE ENTORNO
+# ============================================
+.env
+.env.*
+!.env.example
+credentials.json
+secrets.json
+
+# ============================================
+# ARCHIVOS DE BACKUP
+# ============================================
+backup/
+*.backup
+*.bk
+*.old
+
+# ============================================
+# ARCHIVOS TEMPORALES
+# ============================================
+tmp/
+temp/
+*.tmp
+*.temp
+*.part
+*.crdownload
+
+# ============================================
+# ARCHIVOS DE COMPILACIÓN
+# ============================================
+*.class
+*.jar
+*.war
+*.ear
+*.dll
+*.so
+*.dylib
+*.exe
+*.msi
+*.app
+
+# ============================================
+# ARCHIVOS DE DATOS DE USUARIO
+# ============================================
+*.user
+*.user.*
+*.session
+*.workspace
+*.solution
+*.sln
+
+# ============================================
+# ARCHIVOS DE DEBUG
+# ============================================
+*.debug
+*.trace
+*.prof
+*.heap
+*.snapshot
+
+# ============================================
+# ARCHIVOS DE SEGURIDAD
+# ============================================
+*.key
+*.pem
+*.cert
+*.crt
+*.csr
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.truststore
+*.gpg
+*.asc
+
+# ============================================
+# ARCHIVOS ESPECÍFICOS DEL PROYECTO
+# ============================================
+
+# Archivos de base de datos generados
+*.db
+*.sqlite
+*.sqlite3
+
+# Archivos de exportación
+export_*.json
+inventario_*.json
+*.pdf
+reporte_*.pdf
+
+# Archivos de caché del navegador
+.htaccess
+.htpasswd
+.browserslistrc
+
+# Archivos de cobertura
+.nyc_output
+coverage
+
+# Archivos de reportes
+reports/
+*.html
+*.xml
+*.json

@@ -1,0 +1,603 @@
+/* src/ui/styles/components.css */
+/* Estilos específicos para componentes - V1.5 */
+
+/* ============================================
+   HEADER
+   ============================================ */
+
+.app-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0 12px 0;
+  margin-bottom: 4px;
+  border-bottom: 1px solid #e8ecf1;
+}
+
+.app-header .logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #f0f0f0;
+  padding: 4px;
+  flex-shrink: 0;
+}
+
+.app-header .title-group {
+  flex: 1;
+}
+
+.app-header .title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1a237e;
+  letter-spacing: -0.3px;
+}
+
+.app-header .sub {
+  font-size: 11px;
+  color: #8892a0;
+}
+
+.app-header .licencia-contador {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 20px;
+  background: #f5f7fa;
+  color: #666;
+  border: 1px solid #e8ecf1;
+  white-space: nowrap;
+  margin-left: auto;
+}
+
+/* ============================================
+   BOTONES DE ACCIÓN (MÁS GRANDES)
+   ============================================ */
+
+.btn-action {
+  padding: 10px 6px;
+  border: none;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 12px;
+  cursor: pointer;
+  min-height: 44px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  transition: all 0.2s ease;
+  line-height: 1.2;
+  width: 100%;
+  color: white;
+}
+
+.btn-action .icon {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.btn-action .label {
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.1;
+  margin-top: 1px;
+}
+
+.btn-action .sub {
+  font-size: 9px;
+  font-weight: 400;
+  opacity: 0.8;
+  line-height: 1;
+  margin-top: 0px;
+}
+
+.btn-action:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.btn-action:active {
+  transform: scale(0.96);
+}
+
+/* Colores profesionales */
+.btn-cerrar {
+  background: #c62828;
+}
+
+.btn-cerrar:hover {
+  background: #b71c1c;
+}
+
+.btn-nuevo {
+  background: #e65100;
+}
+
+.btn-nuevo:hover {
+  background: #bf360c;
+}
+
+.btn-pdf {
+  background: #1565c0;
+}
+
+.btn-pdf:hover {
+  background: #0d47a1;
+}
+
+.btn-whatsapp {
+  background: #25D366;
+}
+
+.btn-whatsapp:hover {
+  background: #128C7E;
+}
+
+.btn-dev {
+  background: #1a237e;
+}
+
+.btn-dev:hover {
+  background: #0d47a1;
+}
+
+/* ============================================
+   ACCIONES GRID
+   ============================================ */
+
+.acciones-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.acciones-grid .btn-action {
+  width: 100%;
+}
+
+.acciones-grid .btn-action.full {
+  grid-column: 1 / -1;
+}
+
+/* ============================================
+   TOTAL (TAMAÑO REDUCIDO)
+   ============================================ */
+
+.total {
+  font-size: 18px;
+  /* ← REDUCIDO de 20px */
+  font-weight: 700;
+  text-align: center;
+  padding: 10px;
+  /* ← REDUCIDO de 12px */
+  border-radius: 12px;
+  margin: 10px 0;
+  border: 2px solid #a5d6a7;
+  background: #e8f5e9;
+  color: #1b5e20;
+  box-shadow: 0 2px 8px rgba(27, 94, 32, 0.06);
+  transition: 0.3s;
+}
+
+.total.sobra {
+  background: #fff3e0;
+  color: #e65100;
+  border-color: #ffcc80;
+}
+
+.total.falta {
+  background: #fef2f2;
+  color: #c62828;
+  border-color: #fecaca;
+}
+
+/* ============================================
+   LISTA DE PRODUCTOS (INVENTARIO)
+   ============================================ */
+
+.lista-productos {
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #e8ecf1;
+  overflow: hidden;
+}
+
+.lista-productos .header {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr auto;
+  padding: 10px 12px;
+  background: #f5f7fa;
+  font-weight: 600;
+  font-size: 12px;
+  color: #666;
+  border-bottom: 1px solid #e8ecf1;
+}
+
+.lista-productos .item {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr auto;
+  padding: 10px 12px;
+  border-bottom: 1px solid #f0f0f0;
+  align-items: center;
+}
+
+.lista-productos .item:last-child {
+  border-bottom: none;
+}
+
+.lista-productos .item .nombre {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.lista-productos .item .precio {
+  color: #1a237e;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.lista-productos .item .cantidad {
+  font-size: 14px;
+}
+
+.lista-productos .item .acciones {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+}
+
+.lista-productos .item .acciones button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 4px;
+  min-height: 36px;
+  min-width: 36px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.lista-productos .item .acciones .btn-editar {
+  color: #1a237e;
+}
+
+.lista-productos .item .acciones .btn-editar:hover {
+  background: #e8eaf6;
+}
+
+.lista-productos .item .acciones .btn-eliminar {
+  color: #c62828;
+}
+
+.lista-productos .item .acciones .btn-eliminar:hover {
+  background: #fef2f2;
+}
+
+/* ============================================
+   HISTORIAL - TURNOS
+   ============================================ */
+
+.turno-card {
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #e8ecf1;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-left: 4px solid #1a237e;
+}
+
+.turno-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.turno-card .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.turno-card .header .info .dependiente {
+  font-weight: 700;
+  font-size: 15px;
+  color: #1a2332;
+}
+
+.turno-card .header .info .turno-tag {
+  font-size: 11px;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-weight: 600;
+}
+
+.turno-card .header .info .turno-tag.dia {
+  background: #fff3e0;
+  color: #e65100;
+}
+
+.turno-card .header .info .turno-tag.noche {
+  background: #e3f2fd;
+  color: #0d47a1;
+}
+
+.turno-card .header .total {
+  text-align: right;
+}
+
+.turno-card .header .total .monto {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1a237e;
+}
+
+.turno-card .header .total .productos {
+  font-size: 11px;
+  color: #999;
+}
+
+.turno-card .footer {
+  display: flex;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.turno-card .footer button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+  min-height: 36px;
+  transition: all 0.2s ease;
+}
+
+.turno-card .footer .btn-ver {
+  flex: 1;
+  background: #e8eaf6;
+  color: #1a237e;
+}
+
+.turno-card .footer .btn-ver:hover {
+  background: #c5cae9;
+}
+
+.turno-card .footer .btn-eliminar {
+  background: #fef2f2;
+  color: #c62828;
+}
+
+.turno-card .footer .btn-eliminar:hover {
+  background: #fecaca;
+}
+
+/* ============================================
+   FILTROS (HISTORIAL)
+   ============================================ */
+
+.filtros {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 12px;
+  background: #f5f7fa;
+  padding: 4px;
+  border-radius: 10px;
+}
+
+.filtros button {
+  flex: 1;
+  padding: 8px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+  min-height: 36px;
+  transition: all 0.2s ease;
+  background: transparent;
+  color: #666;
+}
+
+.filtros button.active {
+  background: white;
+  color: #1a237e;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+/* ============================================
+   EMPTY STATE
+   ============================================ */
+
+.empty-state {
+  background: white;
+  border-radius: 12px;
+  padding: 40px 20px;
+  text-align: center;
+  color: #999;
+  border: 1px solid #e8ecf1;
+}
+
+.empty-state .icon {
+  font-size: 48px;
+  margin-bottom: 12px;
+}
+
+.empty-state .title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #666;
+}
+
+.empty-state .sub {
+  font-size: 14px;
+  color: #999;
+}
+
+/* ============================================
+   TOAST NOTIFICACIONES
+   ============================================ */
+
+.toast-notificacion {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 99999;
+  padding: 14px 24px;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  font-size: 14px;
+  font-weight: 600;
+  max-width: 90%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  animation: slideDown 0.3s ease-out;
+  font-family: inherit;
+}
+
+.toast-notificacion.success {
+  background: #e8f5e9;
+  color: #1b5e20;
+  border: 2px solid #a5d6a7;
+}
+
+.toast-notificacion.error {
+  background: #fef2f2;
+  color: #c62828;
+  border: 2px solid #fecaca;
+}
+
+.toast-notificacion.warning {
+  background: #fff3e0;
+  color: #e65100;
+  border: 2px solid #ffcc80;
+}
+
+.toast-notificacion.info {
+  background: #e3f2fd;
+  color: #0d47a1;
+  border: 2px solid #90caf9;
+}
+
+.toast-notificacion .icono {
+  font-size: 20px;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* ============================================
+   MODAL
+   ============================================ */
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  padding: 20px;
+  backdrop-filter: blur(4px);
+}
+
+.modal-box {
+  background: white;
+  border-radius: 16px;
+  max-width: 380px;
+  width: 100%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.modal-box .modal-header {
+  padding: 20px 20px 16px;
+  border-bottom: 1px solid #e8ecf1;
+}
+
+.modal-box .modal-header h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #1a237e;
+}
+
+.modal-box .modal-body {
+  padding: 20px;
+}
+
+.modal-box .modal-body label {
+  display: block;
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 4px;
+}
+
+.modal-box .modal-body input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 14px;
+  min-height: 44px;
+  margin-bottom: 14px;
+  transition: all 0.2s ease;
+}
+
+.modal-box .modal-body input:focus {
+  border-color: #1a237e;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(26, 35, 126, 0.06);
+}
+
+.modal-box .modal-footer {
+  padding: 12px 20px 20px;
+  display: flex;
+  gap: 8px;
+}
+
+.modal-box .modal-footer button {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  min-height: 44px;
+  transition: all 0.2s ease;
+}
+
+.modal-box .modal-footer .btn-cancelar {
+  background: #e8ecf1;
+  color: #333;
+}
+
+.modal-box .modal-footer .btn-guardar {
+  background: linear-gradient(135deg, #1a237e, #0d47a1);
+  color: white;
+  flex: 2;
+}

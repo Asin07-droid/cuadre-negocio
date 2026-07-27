@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Cuadre de Negocio - TecnoRouteV</title>
+  
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="logo-app.png">
+  <meta name="theme-color" content="#1a237e">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  
+  <!-- Estilos -->
+  <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href="components.css">
+  
+  <!-- Librerías -->
+  <script src="libs/jspdf.umd.min.js"></script>
+  <script src="libs/jspdf.plugin.autotable.min.js"></script>
+</head>
+<body>
+  <div id="app">
+    <div id="app-content"></div>
+    
+    <nav id="mainNav" class="nav-bottom">
+      <button class="nav-item active" data-page="cuadre">
+        <span class="icon">📊</span>
+        Cuadre
+      </button>
+      <button class="nav-item" data-page="historial">
+        <span class="icon">📋</span>
+        Historial
+      </button>
+      <button class="nav-item" data-page="inventario">
+        <span class="icon">📦</span>
+        Inventario
+      </button>
+    </nav>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
