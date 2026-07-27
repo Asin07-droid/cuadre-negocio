@@ -1,3 +1,5 @@
+// InventarioPage.js
+
 import { 
   obtenerProductos, 
   agregarProducto, 
@@ -50,18 +52,26 @@ export async function renderInventarioPage() {
         <div class="licencia-contador" id="licenciaContadorHeader">${contadorLicencia}</div>
       </div>
 
+      <!-- TÍTULO -->
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
         <h1 style="color: #1a237e; font-size: 20px; margin: 0;">📦 Inventario</h1>
         <span style="font-size: 13px; color: #666;">${productos.length} productos</span>
       </div>
 
+      <!-- SOLO 3 BOTONES -->
       <div style="display: flex; gap: 6px; margin-bottom: 12px; flex-wrap: wrap;">
-        <button id="btnExportarInventario" style="flex: 1; padding: 10px; background: #1a237e; color: white; border: none; border-radius: 8px; font-weight: 600; font-size: 13px; cursor: pointer; min-height: 44px;">📲 Exportar</button>
-        <button id="btnImportarWhatsApp" style="flex: 1; padding: 10px; background: #25D366; color: white; border: none; border-radius: 8px; font-weight: 600; font-size: 13px; cursor: pointer; min-height: 44px;">📥 Importar desde WhatsApp</button>
-        <button id="btnImportarArchivo" style="flex: 1; padding: 10px; background: #2e7d32; color: white; border: none; border-radius: 8px; font-weight: 600; font-size: 13px; cursor: pointer; min-height: 44px;">📄 Importar Archivo</button>
-        <button id="btnAgregarProducto" style="flex: 1; padding: 10px; background: #f57c00; color: white; border: none; border-radius: 8px; font-weight: 600; font-size: 13px; cursor: pointer; min-height: 44px;">➕ Agregar</button>
+        <button id="btnExportarInventario" style="flex: 1; padding: 10px; background: #1a237e; color: white; border: none; border-radius: 8px; font-weight: 600; font-size: 13px; cursor: pointer; min-height: 44px;">
+          📲 Exportar (WhatsApp)
+        </button>
+        <button id="btnImportarInventario" style="flex: 1; padding: 10px; background: #2e7d32; color: white; border: none; border-radius: 8px; font-weight: 600; font-size: 13px; cursor: pointer; min-height: 44px;">
+          📥 Importar
+        </button>
+        <button id="btnAgregarProducto" style="flex: 1; padding: 10px; background: #f57c00; color: white; border: none; border-radius: 8px; font-weight: 600; font-size: 13px; cursor: pointer; min-height: 44px;">
+          ➕ Agregar
+        </button>
       </div>
 
+      <!-- MODAL PARA IMPORTAR DESDE WHATSAPP -->
       <div id="modalImportarWhatsApp" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 9999; padding: 20px; backdrop-filter: blur(4px);">
         <div style="background: white; border-radius: 16px; max-width: 400px; width: 100%; margin: 50px auto; padding: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.3);">
           <h3 style="margin: 0 0 10px 0; color: #1a237e;">📥 Importar desde WhatsApp</h3>
@@ -73,8 +83,6 @@ export async function renderInventarioPage() {
           </div>
         </div>
       </div>
-
-      <input type="file" id="inputImportarArchivo" accept=".txt" style="display: none;">
 
       <div id="listaProductos">
         ${productos.length === 0 ? `
@@ -108,26 +116,28 @@ export async function renderInventarioPage() {
     </div>
   `;
 
+  // ============================================
+  // EVENTOS
+  // ============================================
+
   document.getElementById('btnAgregarProducto').addEventListener('click', () => mostrarModalProducto(null));
+  
+  // Exportar = Enviar por WhatsApp
   document.getElementById('btnExportarInventario').addEventListener('click', enviarInventarioWhatsApp);
-  document.getElementById('btnImportarWhatsApp').addEventListener('click', () => {
+  
+  // Importar = Abrir modal para pegar texto
+  document.getElementById('btnImportarInventario').addEventListener('click', () => {
     document.getElementById('modalImportarWhatsApp').style.display = 'block';
     document.getElementById('textoWhatsApp').value = '';
     document.getElementById('textoWhatsApp').focus();
   });
+
   document.getElementById('btnCancelarImport').addEventListener('click', () => {
     document.getElementById('modalImportarWhatsApp').style.display = 'none';
   });
+
   document.getElementById('btnImportarTexto').addEventListener('click', importarDesdeWhatsApp);
-  document.getElementById('btnImportarArchivo').addEventListener('click', () => {
-    document.getElementById('inputImportarArchivo').click();
-  });
-  document.getElementById('inputImportarArchivo').addEventListener('change', async function(event) {
-    const file = event.target.files[0];
-    if (!file) return;
-    await importarArchivo(file);
-    this.value = '';
-  });
+
   document.getElementById('modalImportarWhatsApp').addEventListener('click', function(e) {
     if (e.target === this) {
       this.style.display = 'none';
@@ -154,6 +164,10 @@ export async function renderInventarioPage() {
     });
   });
 }
+
+// ============================================
+// MODAL: AGREGAR / EDITAR PRODUCTO
+// ============================================
 
 function mostrarModalProducto(producto) {
   const esEdicion = producto !== null;
@@ -271,6 +285,10 @@ function mostrarModalProducto(producto) {
   }, 100);
 }
 
+// ============================================
+// ENVIAR INVENTARIO POR WHATSAPP
+// ============================================
+
 function enviarInventarioWhatsApp() {
   if (productos.length === 0) {
     notificacionSinProductos();
@@ -313,6 +331,10 @@ function enviarInventarioWhatsApp() {
     window.open(`https://wa.me/?text=${mensajeCodificado}`, '_blank');
   }
 }
+
+// ============================================
+// IMPORTAR DESDE WHATSAPP (TEXTO PEGADO)
+// ============================================
 
 async function importarDesdeWhatsApp() {
   const texto = document.getElementById('textoWhatsApp').value;
@@ -373,6 +395,10 @@ async function importarDesdeWhatsApp() {
   }
 }
 
+// ============================================
+// PARSEAR TEXTO DE INVENTARIO (WhatsApp)
+// ============================================
+
 function parsearTextoInventario(texto) {
   const lineas = texto.split('\n');
   const productosImportados = [];
@@ -426,56 +452,9 @@ function parsearTextoInventario(texto) {
   return productosImportados;
 }
 
-async function importarArchivo(file) {
-  try {
-    const texto = await file.text();
-    const productosImportados = parsearTextoInventario(texto);
-
-    if (productosImportados.length === 0) {
-      notificacionError('No se encontraron productos válidos en el archivo');
-      return;
-    }
-
-    let mensaje = `📦 Se importarán ${productosImportados.length} productos:\n\n`;
-    productosImportados.slice(0, 5).forEach(p => {
-      mensaje += `  • ${p.nombre}: ${p.stock || 0} unidades ($${p.precio})\n`;
-    });
-    if (productosImportados.length > 5) {
-      mensaje += `\n  ... y ${productosImportados.length - 5} más.`;
-    }
-    mensaje += `\n\n¿Deseas continuar con la importación?`;
-
-    if (!confirm(mensaje)) {
-      notificacionImportacionCancelada();
-      return;
-    }
-
-    let importados = 0;
-    let actualizados = 0;
-
-    for (let j = 0; j < productosImportados.length; j++) {
-      const prod = productosImportados[j];
-      const existente = productos.find(p => p.nombre.toLowerCase() === prod.nombre.toLowerCase());
-      
-      if (existente) {
-        existente.precio = prod.precio;
-        existente.stock = prod.stock || 0;
-        await actualizarProducto(existente);
-        actualizados++;
-      } else {
-        await agregarProducto(prod);
-        importados++;
-      }
-    }
-
-    notificacionInventarioImportado(importados, actualizados);
-    setTimeout(() => { renderInventarioPage(); }, 500);
-
-  } catch (error) {
-    console.error('Error al importar archivo:', error);
-    notificacionInventarioError('Error al importar: ' + error.message);
-  }
-}
+// ============================================
+// ELIMINAR PRODUCTO
+// ============================================
 
 async function eliminarProductoHandler(producto) {
   try {
