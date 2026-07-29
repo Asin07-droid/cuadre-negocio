@@ -2,7 +2,7 @@
   "name": "Cuadre de Negocio",
   "short_name": "CuadreNegocio",
   "description": "Aplicación de cuadre diario para negocios",
-  "start_url": ".",
+  "start_url": "/cuadre-negocio/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#1a237e",

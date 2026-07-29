@@ -39,7 +39,8 @@ function mostrarSplash() {
   
   splash.innerHTML = `
     <div style="width: 130px; height: 130px; border-radius: 50%; border: 4px solid #1a237e; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; background: #f0f0f0;">
-      <img src="logo-tecnoroutev.png" alt="TecnoRouteV" style="width: 110px; height: 110px; border-radius: 50%; object-fit: cover;">
+      <img src="logo-tecnoroutev.png" alt="TecnoRouteV" 
+           style="width: 110px; height: 110px; border-radius: 50%; object-fit: cover;">
     </div>
     <h1 style="color: #1a237e; font-size: 24px; font-weight: 700; margin: 0;">Cuadre de Negocio</h1>
     <p style="color: #1a237e; font-size: 14px; margin-top: 4px; opacity: 0.7;">Versión 1.5</p>
@@ -463,7 +464,7 @@ window.reiniciarLicencia = reiniciarLicencia;
 console.log('✅ app.js cargado correctamente');
 
 // ============================================
-// REGISTRAR SERVICE WORKER
+// REGISTRAR SERVICE WORKER (OFFLINE)
 // ============================================
 
 if ('serviceWorker' in navigator) {
@@ -477,4 +478,47 @@ if ('serviceWorker' in navigator) {
         console.log('❌ Error al registrar Service Worker:', error);
       });
   });
+}
+
+// ============================================
+// KEEP ALIVE - MANTENER SERVICE WORKER ACTIVO
+// ============================================
+
+if ('serviceWorker' in navigator) {
+  // Mantener el Service Worker activo enviando un "ping" cada 30 segundos
+  setInterval(function() {
+    navigator.serviceWorker.ready.then(function(registration) {
+      if (registration.active) {
+        registration.active.postMessage({ type: 'KEEP_ALIVE' });
+        console.log('💓 Ping al Service Worker');
+      }
+    }).catch(function() {
+      // Ignorar errores
+    });
+  }, 30000); // Cada 30 segundos
+}
+
+// ============================================
+// RECUPERAR OFFLINE - SI EL SW SE DETIENE
+// ============================================
+
+// Si el Service Worker se detiene, la app intentará registrarlo de nuevo
+if ('serviceWorker' in navigator) {
+  // Verificar cada 10 segundos si el SW sigue activo
+  setInterval(function() {
+    navigator.serviceWorker.getRegistration().then(function(registration) {
+      if (!registration || !registration.active) {
+        console.log('🔄 Service Worker no activo, registrando de nuevo...');
+        navigator.serviceWorker.register('sw.js', { scope: '/' })
+          .then(function() {
+            console.log('✅ Service Worker registrado nuevamente');
+          })
+          .catch(function(error) {
+            console.log('❌ Error al registrar Service Worker:', error);
+          });
+      }
+    }).catch(function() {
+      // Ignorar errores
+    });
+  }, 10000); // Cada 10 segundos
 }

@@ -6,6 +6,7 @@ import {
   actualizarProducto, 
   eliminarProducto 
 } from './src/infrastructure/indexeddb/productosRepository.js';
+import { obtenerTextoContador } from './licenciaService.js';
 import {
   notificacionExito,
   notificacionError,
@@ -21,7 +22,6 @@ import {
   notificacionImportacionCancelada,
   notificacionWhatsAppEnviado
 } from './notificacionService.js';
-import { obtenerTextoContador } from './licenciaService.js';
 
 let productos = [];
 
@@ -36,8 +36,7 @@ export async function renderInventarioPage() {
     productos = [];
   }
 
-  const contadorExistente = document.getElementById('licenciaContador');
-  const contadorLicencia = contadorExistente ? contadorExistente.textContent : '🔓 3d gratis';
+  const contadorLicencia = obtenerTextoContador();
 
   container.innerHTML = `
     <div style="padding: 10px; max-width: 500px; margin: 0 auto;">
@@ -52,26 +51,17 @@ export async function renderInventarioPage() {
         <div class="licencia-contador" id="licenciaContadorHeader">${contadorLicencia}</div>
       </div>
 
-      <!-- TÍTULO -->
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
         <h1 style="color: #1a237e; font-size: 20px; margin: 0;">📦 Inventario</h1>
         <span style="font-size: 13px; color: #666;">${productos.length} productos</span>
       </div>
 
-      <!-- SOLO 3 BOTONES -->
       <div style="display: flex; gap: 6px; margin-bottom: 12px; flex-wrap: wrap;">
-        <button id="btnExportarInventario" style="flex: 1; padding: 10px; background: #1a237e; color: white; border: none; border-radius: 8px; font-weight: 600; font-size: 13px; cursor: pointer; min-height: 44px;">
-          📲 Exportar (WhatsApp)
-        </button>
-        <button id="btnImportarInventario" style="flex: 1; padding: 10px; background: #2e7d32; color: white; border: none; border-radius: 8px; font-weight: 600; font-size: 13px; cursor: pointer; min-height: 44px;">
-          📥 Importar
-        </button>
-        <button id="btnAgregarProducto" style="flex: 1; padding: 10px; background: #f57c00; color: white; border: none; border-radius: 8px; font-weight: 600; font-size: 13px; cursor: pointer; min-height: 44px;">
-          ➕ Agregar
-        </button>
+        <button id="btnExportarInventario" style="flex: 1; padding: 10px; background: #1a237e; color: white; border: none; border-radius: 8px; font-weight: 600; font-size: 13px; cursor: pointer; min-height: 44px;">📲 Exportar (WhatsApp)</button>
+        <button id="btnImportarInventario" style="flex: 1; padding: 10px; background: #2e7d32; color: white; border: none; border-radius: 8px; font-weight: 600; font-size: 13px; cursor: pointer; min-height: 44px;">📥 Importar</button>
+        <button id="btnAgregarProducto" style="flex: 1; padding: 10px; background: #f57c00; color: white; border: none; border-radius: 8px; font-weight: 600; font-size: 13px; cursor: pointer; min-height: 44px;">➕ Agregar</button>
       </div>
 
-      <!-- MODAL PARA IMPORTAR DESDE WHATSAPP -->
       <div id="modalImportarWhatsApp" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 9999; padding: 20px; backdrop-filter: blur(4px);">
         <div style="background: white; border-radius: 16px; max-width: 400px; width: 100%; margin: 50px auto; padding: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.3);">
           <h3 style="margin: 0 0 10px 0; color: #1a237e;">📥 Importar desde WhatsApp</h3>
@@ -121,23 +111,16 @@ export async function renderInventarioPage() {
   // ============================================
 
   document.getElementById('btnAgregarProducto').addEventListener('click', () => mostrarModalProducto(null));
-  
-  // Exportar = Enviar por WhatsApp
   document.getElementById('btnExportarInventario').addEventListener('click', enviarInventarioWhatsApp);
-  
-  // Importar = Abrir modal para pegar texto
   document.getElementById('btnImportarInventario').addEventListener('click', () => {
     document.getElementById('modalImportarWhatsApp').style.display = 'block';
     document.getElementById('textoWhatsApp').value = '';
     document.getElementById('textoWhatsApp').focus();
   });
-
   document.getElementById('btnCancelarImport').addEventListener('click', () => {
     document.getElementById('modalImportarWhatsApp').style.display = 'none';
   });
-
   document.getElementById('btnImportarTexto').addEventListener('click', importarDesdeWhatsApp);
-
   document.getElementById('modalImportarWhatsApp').addEventListener('click', function(e) {
     if (e.target === this) {
       this.style.display = 'none';
@@ -164,10 +147,6 @@ export async function renderInventarioPage() {
     });
   });
 }
-
-// ============================================
-// MODAL: AGREGAR / EDITAR PRODUCTO
-// ============================================
 
 function mostrarModalProducto(producto) {
   const esEdicion = producto !== null;
@@ -285,10 +264,6 @@ function mostrarModalProducto(producto) {
   }, 100);
 }
 
-// ============================================
-// ENVIAR INVENTARIO POR WHATSAPP
-// ============================================
-
 function enviarInventarioWhatsApp() {
   if (productos.length === 0) {
     notificacionSinProductos();
@@ -331,10 +306,6 @@ function enviarInventarioWhatsApp() {
     window.open(`https://wa.me/?text=${mensajeCodificado}`, '_blank');
   }
 }
-
-// ============================================
-// IMPORTAR DESDE WHATSAPP (TEXTO PEGADO)
-// ============================================
 
 async function importarDesdeWhatsApp() {
   const texto = document.getElementById('textoWhatsApp').value;
@@ -395,10 +366,6 @@ async function importarDesdeWhatsApp() {
   }
 }
 
-// ============================================
-// PARSEAR TEXTO DE INVENTARIO (WhatsApp)
-// ============================================
-
 function parsearTextoInventario(texto) {
   const lineas = texto.split('\n');
   const productosImportados = [];
@@ -451,10 +418,6 @@ function parsearTextoInventario(texto) {
 
   return productosImportados;
 }
-
-// ============================================
-// ELIMINAR PRODUCTO
-// ============================================
 
 async function eliminarProductoHandler(producto) {
   try {

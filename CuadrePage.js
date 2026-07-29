@@ -1,6 +1,9 @@
+// CuadrePage.js
+
 import { DENOMINACIONES } from './src/shared/constants/denominaciones.js';
 import { guardarTurno } from './src/infrastructure/indexeddb/turnosRepository.js';
 import { obtenerProductos, actualizarProducto } from './src/infrastructure/indexeddb/productosRepository.js';
+import { obtenerTextoContador } from './licenciaService.js';
 import {
   notificacionExito,
   notificacionError,
@@ -46,6 +49,11 @@ export async function renderCuadrePage() {
     }
   });
 
+  // ============================================
+  // CONTADOR DINÁMICO
+  // ============================================
+  const contadorLicencia = obtenerTextoContador();
+
   container.innerHTML = `
     <div style="padding: 10px; max-width: 500px; margin: 0 auto;">
       
@@ -56,7 +64,7 @@ export async function renderCuadrePage() {
           <div class="title">Cuadre de Negocio</div>
           <div class="sub">Versión 1.5</div>
         </div>
-        <div class="licencia-contador" id="licenciaContadorHeader">🔓 3d gratis</div>
+        <div class="licencia-contador" id="licenciaContadorHeader">${contadorLicencia}</div>
       </div>
 
       <!-- TÍTULO Y TURNO -->
@@ -404,8 +412,6 @@ window.cerrarTurno = async function() {
     await guardarTurno(turno);
     notificacionTurnoCerrado(dependiente, totalVentas);
     
-    // ✅ LIMPIAR PRODUCTOS Y BILLETES
-    // ✅ EL NOMBRE DEL DEPENDIENTE SE MANTIENE
     document.getElementById('productos-container').innerHTML = '';
     contador = 0;
     for (let i = 0; i < 3; i++) {

@@ -1,4 +1,7 @@
+// HistorialPage.js
+
 import { obtenerTurnos } from './src/infrastructure/indexeddb/turnosRepository.js';
+import { obtenerTextoContador } from './licenciaService.js';
 
 let turnos = [];
 let filtro = 'todos';
@@ -15,6 +18,7 @@ export async function renderHistorialPage() {
   }
 
   const turnosFiltrados = filtrarTurnos(turnos);
+  const contadorLicencia = obtenerTextoContador();
 
   container.innerHTML = `
     <div style="padding: 10px; max-width: 500px; margin: 0 auto;">
@@ -26,7 +30,7 @@ export async function renderHistorialPage() {
           <div class="title">Cuadre de Negocio</div>
           <div class="sub">Versión 1.5</div>
         </div>
-        <div class="licencia-contador" id="licenciaContadorHeader">🔓 3d gratis</div>
+        <div class="licencia-contador" id="licenciaContadorHeader">${contadorLicencia}</div>
       </div>
 
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
