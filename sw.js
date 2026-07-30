@@ -1,7 +1,7 @@
 // sw.js (en la raíz del proyecto — NO en /public/)
 // Service Worker para PWA y offline
 
-const CACHE_NAME = 'cuadre-negocio-v1.5.2';
+const CACHE_NAME = 'cuadre-negocio-v1.5.3';
 const ASSETS = [
   './',
   './index.html',
@@ -68,7 +68,8 @@ self.addEventListener('fetch', (event) => {
 
   if (esCodigoJS) {
     // Network-first para JS: siempre intenta la versión más reciente primero.
-    // Solo usa la caché si no hay conexión.
+    // Solo usa la caché si no hay conexión, y si tampoco hay caché, responde
+    // con un error controlado (nunca undefined).
     event.respondWith(
       fetch(event.request)
         .then((response) => {
@@ -76,7 +77,15 @@ self.addEventListener('fetch', (event) => {
           caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
           return response;
         })
-        .catch(() => caches.match(event.request))
+        .catch(async () => {
+          const cacheada = await caches.match(event.request);
+          if (cacheada) return cacheada;
+          return new Response('// Offline: no se pudo cargar este archivo', {
+            status: 503,
+            statusText: 'Service Unavailable',
+            headers: { 'Content-Type': 'application/javascript' }
+          });
+        })
     );
     return;
   }
