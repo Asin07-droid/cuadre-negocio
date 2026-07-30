@@ -1,21 +1,22 @@
 {
   "name": "Cuadre de Negocio",
-  "short_name": "CuadreNegocio",
-  "description": "Aplicación de cuadre diario para negocios",
-  "start_url": "/cuadre-negocio/",
+  "short_name": "Cuadre",
+  "description": "App offline para control de caja en Cuba",
+  "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
-  "background_color": "#ffffff",
+  "background_color": "#1a237e",
   "theme_color": "#1a237e",
   "orientation": "portrait",
   "icons": [
     {
-      "src": "logo-app.png",
+      "src": "src/ui/assets/logo-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "logo-app.png",
+      "src": "src/ui/assets/logo-app.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"

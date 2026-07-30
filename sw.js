@@ -1,124 +1,94 @@
-// sw.js - Service Worker para PWA y offline
+// sw.js (en la raíz del proyecto — NO en /public/)
+// Service Worker para PWA y offline
 
-const CACHE_NAME = 'cuadre-negocio-v2.4';
+const CACHE_NAME = 'cuadre-negocio-v1.5.2';
 const ASSETS = [
-  '/cuadre-negocio/',
-  '/cuadre-negocio/index.html',
-  '/cuadre-negocio/manifest.json',
-  '/cuadre-negocio/logo-app.png',
-  '/cuadre-negocio/logo-tecnoroutev.png',
-  '/cuadre-negocio/app.js',
-  '/cuadre-negocio/CuadrePage.js',
-  '/cuadre-negocio/HistorialPage.js',
-  '/cuadre-negocio/InventarioPage.js',
-  '/cuadre-negocio/licenciaService.js',
-  '/cuadre-negocio/tutorialService.js',
-  '/cuadre-negocio/notificacionService.js',
-  '/cuadre-negocio/main.css',
-  '/cuadre-negocio/components.css',
-  '/cuadre-negocio/libs/jspdf.umd.min.js',
-  '/cuadre-negocio/libs/jspdf.plugin.autotable.min.js'
+  './',
+  './index.html',
+  './manifest.json',
+  './src/app.js',
+  './src/ui/pages/CuadrePage.js',
+  './src/ui/pages/HistorialPage.js',
+  './src/ui/pages/InventarioPage.js',
+  './src/ui/styles/main.css',
+  './src/ui/styles/components.css',
+  './src/ui/assets/logo-app.png',
+  './src/ui/assets/logo-192.png',
+  './src/ui/assets/logo-tecnoroutev.png',
+  './public/libs/jspdf.umd.min.js',
+  './public/libs/jspdf.plugin.autotable.min.js',
 ];
 
 // ============================================
 // INSTALACIÓN
 // ============================================
 
-self.addEventListener('install', function(event) {
+self.addEventListener('install', (event) => {
   console.log('📦 Service Worker instalando...');
   event.waitUntil(
     caches.open(CACHE_NAME)
-      .then(function(cache) {
+      .then((cache) => {
         console.log('✅ Cacheando assets...');
         return cache.addAll(ASSETS);
       })
-      .then(function() {
-        return self.skipWaiting();
-      })
+      .then(() => self.skipWaiting())
+      .catch((err) => console.error('❌ Falló el precache:', err))
   );
 });
 
 // ============================================
-// ACTIVACIÓN - CON LÍMITE DE CACHÉ
+// ACTIVACIÓN
 // ============================================
 
-self.addEventListener('activate', function(event) {
+self.addEventListener('activate', (event) => {
   console.log('⚡ Service Worker activado');
   event.waitUntil(
-    caches.keys().then(function(cacheNames) {
+    caches.keys().then((cacheNames) => {
       return Promise.all(
-        cacheNames.map(function(cacheName) {
+        cacheNames.map((cacheName) => {
           if (cacheName !== CACHE_NAME) {
             console.log('🗑️ Eliminando cache antiguo:', cacheName);
             return caches.delete(cacheName);
           }
         })
       );
-    }).then(function() {
-      return self.clients.claim();
-    })
+    }).then(() => self.clients.claim())
   );
 });
 
 // ============================================
-// FETCH - INTERCEPTAR TODAS LAS PETICIONES
+// FETCH (INTERCEPTAR PETICIONES)
 // ============================================
 
-self.addEventListener('fetch', function(event) {
-  var request = event.request;
-  var url = request.url;
+self.addEventListener('fetch', (event) => {
+  if (event.request.method !== 'GET') return;
 
-  // ============================================
-  // 1. NAVEGACIÓN (cuando el usuario recarga o abre la app)
-  // ============================================
-  if (request.mode === 'navigate') {
-    event.respondWith(
-      fetch(request).catch(function() {
-        // Si falla la red, devolver index.html desde el caché
-        return caches.match('/cuadre-negocio/index.html');
-      })
-    );
-    return;
-  }
+  const url = event.request.url;
+  const esCodigoJS = url.endsWith('.js');
 
-  // ============================================
-  // 2. ARCHIVOS JS, CSS Y JSON (primero red, luego caché)
-  // ============================================
-  if (url.endsWith('.js') || url.endsWith('.css') || url.endsWith('.json')) {
+  if (esCodigoJS) {
+    // Network-first para JS: siempre intenta la versión más reciente primero.
+    // Solo usa la caché si no hay conexión.
     event.respondWith(
-      fetch(request)
-        .then(function(response) {
-          var clone = response.clone();
-          caches.open(CACHE_NAME).then(function(cache) {
-            cache.put(request, clone);
-          });
+      fetch(event.request)
+        .then((response) => {
+          const clone = response.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
           return response;
         })
-        .catch(function() {
-          return caches.match(request);
-        })
+        .catch(() => caches.match(event.request))
     );
     return;
   }
 
-  // ============================================
-  // 3. RESTO (imágenes, etc.) - caché primero
-  // ============================================
+  // Cache-first para el resto de assets (imágenes, css, libs) — no cambian tan seguido
   event.respondWith(
-    caches.match(request)
-      .then(function(response) {
+    caches.match(event.request)
+      .then((response) => {
         if (response) {
           return response;
         }
-        return fetch(request).catch(function() {
-          // Si es imagen, devolver una imagen vacía
-          if (url.endsWith('.png') || url.endsWith('.jpg') || url.endsWith('.svg')) {
-            return new Response('', { status: 404 });
-          }
-          // Si es HTML y no está en caché, devolver index.html
-          if (url.endsWith('.html')) {
-            return caches.match('/cuadre-negocio/index.html');
-          }
+        return fetch(event.request).catch(() => {
           return new Response('Offline - Contenido no disponible', {
             status: 503,
             statusText: 'Service Unavailable'
