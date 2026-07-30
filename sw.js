@@ -1,22 +1,27 @@
-// sw.js (en la raíz del proyecto — NO en /public/)
+// sw.js (en la raíz del proyecto)
 // Service Worker para PWA y offline
 
-const CACHE_NAME = 'cuadre-negocio-v1.5.3';
+const CACHE_NAME = 'cuadre-negocio-v1.5.4';
 const ASSETS = [
   './',
   './index.html',
   './manifest.json',
-  './src/app.js',
-  './src/ui/pages/CuadrePage.js',
-  './src/ui/pages/HistorialPage.js',
-  './src/ui/pages/InventarioPage.js',
-  './src/ui/styles/main.css',
-  './src/ui/styles/components.css',
-  './src/ui/assets/logo-app.png',
-  './src/ui/assets/logo-192.png',
-  './src/ui/assets/logo-tecnoroutev.png',
-  './public/libs/jspdf.umd.min.js',
-  './public/libs/jspdf.plugin.autotable.min.js',
+  './app.js',
+  './CuadrePage.js',
+  './HistorialPage.js',
+  './InventarioPage.js',
+  './descargaService.js',
+  './licenciaService.js',
+  './notificacionService.js',
+  './tutorialService.js',
+  './src/infrastructure/indexeddb/db.js',
+  './src/infrastructure/indexeddb/productosRepository.js',
+  './src/infrastructure/indexeddb/turnosRepository.js',
+  './src/shared/constants/denominaciones.js',
+  './main.css',
+  './components.css',
+  './logo-app.png',
+  './logo-tecnoroutev.png',
 ];
 
 // ============================================
@@ -90,7 +95,7 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Cache-first para el resto de assets (imágenes, css, libs) — no cambian tan seguido
+  // Cache-first para el resto de assets (imágenes, css) — no cambian tan seguido
   event.respondWith(
     caches.match(event.request)
       .then((response) => {

@@ -10,13 +10,13 @@
   "orientation": "portrait",
   "icons": [
     {
-      "src": "src/ui/assets/logo-192.png",
+      "src": "logo-app.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "src/ui/assets/logo-app.png",
+      "src": "logo-tecnoroutev.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
