@@ -29,6 +29,19 @@
             .catch(err => console.error('❌ Error registrando Service Worker:', err));
         });
       }
+
+      // Captura el prompt de instalación lo antes posible (puede disparar antes
+      // de que app.js termine de cargar), para poder ofrecer un botón propio.
+      window.deferredInstallPrompt = null;
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        window.deferredInstallPrompt = e;
+        window.dispatchEvent(new Event('pwa-installable'));
+      });
+      window.addEventListener('appinstalled', () => {
+        window.deferredInstallPrompt = null;
+        window.dispatchEvent(new Event('pwa-installed'));
+      });
     </script>
 </head>
 <body>

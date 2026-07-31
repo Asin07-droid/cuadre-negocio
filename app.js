@@ -359,6 +359,84 @@ function actualizarHeader() {
 }
 
 // ============================================
+// BOTÓN DE INSTALACIÓN (PROPIO, EN VEZ DE DEPENDER SOLO DEL NAVEGADOR)
+// ============================================
+
+var CLAVE_BANNER_INSTALAR_CERRADO = 'banner_instalar_cerrado';
+
+function esIOS() {
+  return /iphone|ipad|ipod/i.test(navigator.userAgent);
+}
+
+function appYaInstalada() {
+  return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+}
+
+function mostrarBannerInstalar(modo) {
+  if (appYaInstalada()) return;
+  if (localStorage.getItem(CLAVE_BANNER_INSTALAR_CERRADO) === 'true') return;
+  if (document.getElementById('bannerInstalar')) return;
+
+  var banner = document.createElement('div');
+  banner.id = 'bannerInstalar';
+  banner.style.cssText = 'position:fixed;left:12px;right:12px;bottom:76px;z-index:9998;' +
+    'background:#16213E;color:white;border-radius:14px;padding:14px 16px;' +
+    'box-shadow:0 8px 24px rgba(0,0,0,0.28);display:flex;align-items:center;gap:12px;';
+
+  var textoHtml = modo === 'ios'
+    ? '<div style="font-size:13px;line-height:1.4;"><b>📲 Instala la app</b><br>Toca <b>Compartir</b> y luego <b>"Añadir a pantalla de inicio"</b>.</div>'
+    : '<div style="font-size:13px;line-height:1.4;"><b>📲 Instala la app</b><br>Úsala sin conexión, más rápido, sin ocupar el navegador.</div>';
+
+  banner.innerHTML =
+    '<div style="flex:1;">' + textoHtml + '</div>' +
+    (modo === 'ios' ? '' : '<button id="btnInstalarAhora" style="background:#C49B4A;color:#16213E;border:none;border-radius:9px;padding:10px 16px;font-weight:700;font-size:13px;min-height:40px;white-space:nowrap;">Instalar</button>') +
+    '<button id="btnCerrarBannerInstalar" style="background:none;border:none;color:#B8C1D9;font-size:20px;line-height:1;padding:6px;min-height:32px;min-width:32px;">×</button>';
+
+  document.body.appendChild(banner);
+
+  var btnCerrar = document.getElementById('btnCerrarBannerInstalar');
+  if (btnCerrar) {
+    btnCerrar.addEventListener('click', function() {
+      localStorage.setItem(CLAVE_BANNER_INSTALAR_CERRADO, 'true');
+      banner.remove();
+    });
+  }
+
+  var btnInstalar = document.getElementById('btnInstalarAhora');
+  if (btnInstalar) {
+    btnInstalar.addEventListener('click', function() {
+      var prompt = window.deferredInstallPrompt;
+      if (!prompt) return;
+      prompt.prompt();
+      prompt.userChoice.finally(function() {
+        window.deferredInstallPrompt = null;
+        banner.remove();
+      });
+    });
+  }
+}
+
+function iniciarDeteccionInstalacion() {
+  if (appYaInstalada()) return;
+
+  if (window.deferredInstallPrompt) {
+    mostrarBannerInstalar('android');
+  }
+  window.addEventListener('pwa-installable', function() {
+    mostrarBannerInstalar('android');
+  });
+  window.addEventListener('pwa-installed', function() {
+    var banner = document.getElementById('bannerInstalar');
+    if (banner) banner.remove();
+  });
+
+  // iOS Safari nunca dispara beforeinstallprompt: mostramos instrucciones manuales
+  if (esIOS()) {
+    setTimeout(function() { mostrarBannerInstalar('ios'); }, 1500);
+  }
+}
+
+// ============================================
 // INICIALIZAR APP
 // ============================================
 
@@ -417,6 +495,7 @@ async function initApp() {
     container.style.transform = 'translateX(0)';
     
     actualizarHeader();
+    iniciarDeteccionInstalacion();
     
     setTimeout(function() {
       setupSwipe();
