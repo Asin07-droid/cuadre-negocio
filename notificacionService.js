@@ -23,30 +23,30 @@ export function mostrarNotificacion(mensaje, tipo = 'info', duracion = 3000) {
   // Colores según tipo - más sutiles y profesionales
   const colores = {
     success: { 
-      bg: '#e8f5e9', 
-      border: '2px solid #43a047', 
-      text: '#1b5e20', 
+      bg: '#E7F3EC', 
+      border: '2px solid #1F6E43', 
+      text: '#1F6E43', 
       icon: '✅',
       shadow: '0 2px 8px rgba(46, 125, 50, 0.15)'
     },
     error: { 
-      bg: '#fef2f2', 
-      border: '2px solid #e53935', 
-      text: '#c62828', 
+      bg: '#FBEAEA', 
+      border: '2px solid #9B2C2C', 
+      text: '#9B2C2C', 
       icon: '❌',
       shadow: '0 2px 8px rgba(198, 40, 40, 0.15)'
     },
     warning: { 
-      bg: '#fff3e0', 
-      border: '2px solid #fb8c00', 
-      text: '#e65100', 
+      bg: '#FDF3E3', 
+      border: '2px solid #B45309', 
+      text: '#B45309', 
       icon: '⚠️',
       shadow: '0 2px 8px rgba(230, 81, 0, 0.15)'
     },
     info: { 
-      bg: '#e3f2fd', 
-      border: '2px solid #1e88e5', 
-      text: '#0d47a1', 
+      bg: '#E7EEF7', 
+      border: '2px solid #2C5282', 
+      text: '#0B2A5C', 
       icon: 'ℹ️',
       shadow: '0 2px 8px rgba(13, 71, 161, 0.15)'
     },

@@ -52,51 +52,51 @@ export async function renderInventarioPage() {
       </div>
 
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-        <h1 style="color: #1a237e; font-size: 20px; margin: 0;">📦 Inventario</h1>
-        <span style="font-size: 13px; color: #666;">${productos.length} productos</span>
+        <h1 style="color: #16213E; font-size: 20px; margin: 0;">📦 Inventario</h1>
+        <span style="font-size: 13px; color: #64748B;">${productos.length} productos</span>
       </div>
 
       <div style="display: flex; gap: 6px; margin-bottom: 12px; flex-wrap: wrap;">
-        <button id="btnExportarInventario" style="flex: 1; padding: 10px; background: #1a237e; color: white; border: none; border-radius: 8px; font-weight: 600; font-size: 13px; cursor: pointer; min-height: 44px;">📲 Exportar (WhatsApp)</button>
-        <button id="btnImportarInventario" style="flex: 1; padding: 10px; background: #2e7d32; color: white; border: none; border-radius: 8px; font-weight: 600; font-size: 13px; cursor: pointer; min-height: 44px;">📥 Importar</button>
-        <button id="btnAgregarProducto" style="flex: 1; padding: 10px; background: #f57c00; color: white; border: none; border-radius: 8px; font-weight: 600; font-size: 13px; cursor: pointer; min-height: 44px;">➕ Agregar</button>
+        <button id="btnExportarInventario" style="flex: 1; padding: 10px; background: #16213E; color: white; border: none; border-radius: 8px; font-weight: 600; font-size: 13px; cursor: pointer; min-height: 44px;">📲 Exportar (WhatsApp)</button>
+        <button id="btnImportarInventario" style="flex: 1; padding: 10px; background: #1F6E43; color: white; border: none; border-radius: 8px; font-weight: 600; font-size: 13px; cursor: pointer; min-height: 44px;">📥 Importar</button>
+        <button id="btnAgregarProducto" style="flex: 1; padding: 10px; background: #B45309; color: white; border: none; border-radius: 8px; font-weight: 600; font-size: 13px; cursor: pointer; min-height: 44px;">➕ Agregar</button>
       </div>
 
       <div id="modalImportarWhatsApp" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 9999; padding: 20px; backdrop-filter: blur(4px);">
         <div style="background: white; border-radius: 16px; max-width: 400px; width: 100%; margin: 50px auto; padding: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.3);">
-          <h3 style="margin: 0 0 10px 0; color: #1a237e;">📥 Importar desde WhatsApp</h3>
-          <p style="font-size: 13px; color: #666; margin-bottom: 12px;">Copia el mensaje de WhatsApp que contiene el inventario y pégalo aquí:</p>
-          <textarea id="textoWhatsApp" style="width: 100%; height: 200px; padding: 12px; border: 1px solid #e0e0e0; border-radius: 8px; font-size: 14px; font-family: monospace; box-sizing: border-box; resize: vertical;"></textarea>
+          <h3 style="margin: 0 0 10px 0; color: #16213E;">📥 Importar desde WhatsApp</h3>
+          <p style="font-size: 13px; color: #64748B; margin-bottom: 12px;">Copia el mensaje de WhatsApp que contiene el inventario y pégalo aquí:</p>
+          <textarea id="textoWhatsApp" style="width: 100%; height: 200px; padding: 12px; border: 1px solid #DCE0E8; border-radius: 8px; font-size: 14px; font-family: monospace; box-sizing: border-box; resize: vertical;"></textarea>
           <div style="display: flex; gap: 8px; margin-top: 12px;">
-            <button id="btnCancelarImport" style="flex: 1; padding: 12px; background: #e0e0e0; color: #333; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; min-height: 44px;">Cancelar</button>
-            <button id="btnImportarTexto" style="flex: 2; padding: 12px; background: #1a237e; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; min-height: 44px;">📥 Importar</button>
+            <button id="btnCancelarImport" style="flex: 1; padding: 12px; background: #DCE0E8; color: #1E2433; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; min-height: 44px;">Cancelar</button>
+            <button id="btnImportarTexto" style="flex: 2; padding: 12px; background: #16213E; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; min-height: 44px;">📥 Importar</button>
           </div>
         </div>
       </div>
 
       <div id="listaProductos">
         ${productos.length === 0 ? `
-          <div style="background: white; border-radius: 12px; padding: 40px 20px; text-align: center; color: #999; border: 1px solid #e8ecf1;">
+          <div style="background: white; border-radius: 12px; padding: 40px 20px; text-align: center; color: #94A3B8; border: 1px solid #E3E6EE;">
             <div style="font-size: 48px; margin-bottom: 12px;">📦</div>
-            <p style="font-size: 16px; font-weight: 600; color: #666;">No hay productos registrados</p>
+            <p style="font-size: 16px; font-weight: 600; color: #64748B;">No hay productos registrados</p>
             <p style="font-size: 14px;">Haz clic en "Agregar" para crear tu primer producto</p>
           </div>
         ` : `
-          <div style="background: white; border-radius: 12px; border: 1px solid #e8ecf1; overflow: hidden;">
-            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr auto; padding: 10px 12px; background: #f5f5f5; font-weight: 600; font-size: 12px; color: #666; border-bottom: 1px solid #e0e0e0;">
+          <div style="background: white; border-radius: 12px; border: 1px solid #E3E6EE; overflow: hidden;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr auto; padding: 10px 12px; background: #F1F2F6; font-weight: 600; font-size: 12px; color: #64748B; border-bottom: 1px solid #DCE0E8;">
               <span>Producto</span>
               <span>Precio</span>
               <span>Cantidad</span>
               <span style="text-align: center;">Acciones</span>
             </div>
             ${productos.map(p => `
-              <div style="display: grid; grid-template-columns: 1fr 1fr 1fr auto; padding: 10px 12px; border-bottom: 1px solid #f0f0f0; align-items: center;">
+              <div style="display: grid; grid-template-columns: 1fr 1fr 1fr auto; padding: 10px 12px; border-bottom: 1px solid #EDEFF3; align-items: center;">
                 <span style="font-weight: 500; font-size: 14px;">${p.nombre}</span>
-                <span style="color: #1a237e; font-weight: 600; font-size: 14px;">$${p.precio}</span>
+                <span style="color: #16213E; font-weight: 600; font-size: 14px;">$${p.precio}</span>
                 <span style="font-size: 14px;">${p.stock || 0}</span>
                 <div style="display: flex; gap: 6px; justify-content: center;">
-                  <button class="btn-editar" data-id="${p.id}" style="background: none; border: none; color: #1a237e; cursor: pointer; font-size: 16px; padding: 4px; min-height: 36px; min-width: 36px;" title="Editar">✏️</button>
-                  <button class="btn-eliminar" data-id="${p.id}" style="background: none; border: none; color: #dc2626; cursor: pointer; font-size: 16px; padding: 4px; min-height: 36px; min-width: 36px;" title="Eliminar">🗑️</button>
+                  <button class="btn-editar" data-id="${p.id}" style="background: none; border: none; color: #16213E; cursor: pointer; font-size: 16px; padding: 4px; min-height: 36px; min-width: 36px;" title="Editar">✏️</button>
+                  <button class="btn-eliminar" data-id="${p.id}" style="background: none; border: none; color: #9B2C2C; cursor: pointer; font-size: 16px; padding: 4px; min-height: 36px; min-width: 36px;" title="Eliminar">🗑️</button>
                 </div>
               </div>
             `).join('')}
@@ -161,29 +161,29 @@ function mostrarModalProducto(producto) {
 
   overlay.innerHTML = `
     <div style="background: white; border-radius: 16px; max-width: 380px; width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,0.3);">
-      <div style="padding: 20px 20px 16px; border-bottom: 1px solid #e8ecf1;">
-        <h3 style="margin: 0; font-size: 18px; color: #1a237e;">${titulo}</h3>
+      <div style="padding: 20px 20px 16px; border-bottom: 1px solid #E3E6EE;">
+        <h3 style="margin: 0; font-size: 18px; color: #16213E;">${titulo}</h3>
       </div>
       
       <div style="padding: 20px;">
         <div style="margin-bottom: 14px;">
-          <label style="display: block; font-size: 13px; color: #666; margin-bottom: 4px;">Nombre del producto *</label>
-          <input type="text" id="modalNombre" value="${nombreDefault}" placeholder="Ej: Leche, Pan, Queso..." style="width: 100%; padding: 12px 14px; border: 1px solid #e0e0e0; border-radius: 8px; font-size: 14px; min-height: 44px; box-sizing: border-box;">
+          <label style="display: block; font-size: 13px; color: #64748B; margin-bottom: 4px;">Nombre del producto *</label>
+          <input type="text" id="modalNombre" value="${nombreDefault}" placeholder="Ej: Leche, Pan, Queso..." style="width: 100%; padding: 12px 14px; border: 1px solid #DCE0E8; border-radius: 8px; font-size: 14px; min-height: 44px; box-sizing: border-box;">
         </div>
         
         <div style="margin-bottom: 14px;">
-          <label style="display: block; font-size: 13px; color: #666; margin-bottom: 4px;">Precio (en pesos) *</label>
-          <input type="number" id="modalPrecio" value="${precioDefault}" placeholder="0" min="0" step="0.01" style="width: 100%; padding: 12px 14px; border: 1px solid #e0e0e0; border-radius: 8px; font-size: 14px; min-height: 44px; box-sizing: border-box;">
+          <label style="display: block; font-size: 13px; color: #64748B; margin-bottom: 4px;">Precio (en pesos) *</label>
+          <input type="number" id="modalPrecio" value="${precioDefault}" placeholder="0" min="0" step="0.01" style="width: 100%; padding: 12px 14px; border: 1px solid #DCE0E8; border-radius: 8px; font-size: 14px; min-height: 44px; box-sizing: border-box;">
         </div>
         
         <div style="margin-bottom: 14px;">
-          <label style="display: block; font-size: 13px; color: #666; margin-bottom: 4px;">Cantidad en existencia</label>
-          <input type="number" id="modalStock" value="${stockDefault}" placeholder="0" min="0" style="width: 100%; padding: 12px 14px; border: 1px solid #e0e0e0; border-radius: 8px; font-size: 14px; min-height: 44px; box-sizing: border-box;">
+          <label style="display: block; font-size: 13px; color: #64748B; margin-bottom: 4px;">Cantidad en existencia</label>
+          <input type="number" id="modalStock" value="${stockDefault}" placeholder="0" min="0" style="width: 100%; padding: 12px 14px; border: 1px solid #DCE0E8; border-radius: 8px; font-size: 14px; min-height: 44px; box-sizing: border-box;">
         </div>
         
         <div style="display: flex; gap: 8px; margin-top: 8px;">
-          <button id="btnModalCancelar" style="flex: 1; padding: 12px; background: #e0e0e0; color: #333; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; min-height: 44px;">Cancelar</button>
-          <button id="btnModalGuardar" style="flex: 2; padding: 12px; background: linear-gradient(135deg, #1a237e, #0d47a1); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; min-height: 44px;">${esEdicion ? '💾 Actualizar' : '➕ Agregar'}</button>
+          <button id="btnModalCancelar" style="flex: 1; padding: 12px; background: #DCE0E8; color: #1E2433; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; min-height: 44px;">Cancelar</button>
+          <button id="btnModalGuardar" style="flex: 2; padding: 12px; background: linear-gradient(135deg, #16213E, #0B2A5C); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; min-height: 44px;">${esEdicion ? '💾 Actualizar' : '➕ Agregar'}</button>
         </div>
       </div>
     </div>

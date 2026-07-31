@@ -34,48 +34,48 @@ export async function renderHistorialPage() {
       </div>
 
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-        <h1 style="color: #1a237e; font-size: 20px; margin: 0;">📋 Historial</h1>
-        <span style="font-size: 13px; color: #666;">${turnosFiltrados.length} turnos</span>
+        <h1 style="color: #16213E; font-size: 20px; margin: 0;">📋 Historial</h1>
+        <span style="font-size: 13px; color: #64748B;">${turnosFiltrados.length} turnos</span>
       </div>
 
-      <div style="display: flex; gap: 6px; margin-bottom: 12px; background: #f0f2f5; padding: 4px; border-radius: 10px;">
-        <button class="btn-filtro ${filtro === 'todos' ? 'active' : ''}" data-filtro="todos" style="flex: 1; padding: 8px; border: none; border-radius: 8px; font-weight: 600; font-size: 12px; cursor: pointer; background: ${filtro === 'todos' ? '#1a237e' : 'transparent'}; color: ${filtro === 'todos' ? 'white' : '#666'}; min-height: 36px;">📋 Todos</button>
-        <button class="btn-filtro ${filtro === 'dia' ? 'active' : ''}" data-filtro="dia" style="flex: 1; padding: 8px; border: none; border-radius: 8px; font-weight: 600; font-size: 12px; cursor: pointer; background: ${filtro === 'dia' ? '#f57c00' : 'transparent'}; color: ${filtro === 'dia' ? 'white' : '#666'}; min-height: 36px;">☀️ Día</button>
-        <button class="btn-filtro ${filtro === 'noche' ? 'active' : ''}" data-filtro="noche" style="flex: 1; padding: 8px; border: none; border-radius: 8px; font-weight: 600; font-size: 12px; cursor: pointer; background: ${filtro === 'noche' ? '#0d47a1' : 'transparent'}; color: ${filtro === 'noche' ? 'white' : '#666'}; min-height: 36px;">🌙 Noche</button>
+      <div style="display: flex; gap: 6px; margin-bottom: 12px; background: #EDEFF3; padding: 4px; border-radius: 10px;">
+        <button class="btn-filtro ${filtro === 'todos' ? 'active' : ''}" data-filtro="todos" style="flex: 1; padding: 8px; border: none; border-radius: 8px; font-weight: 600; font-size: 12px; cursor: pointer; background: ${filtro === 'todos' ? '#16213E' : 'transparent'}; color: ${filtro === 'todos' ? 'white' : '#64748B'}; min-height: 36px;">📋 Todos</button>
+        <button class="btn-filtro ${filtro === 'dia' ? 'active' : ''}" data-filtro="dia" style="flex: 1; padding: 8px; border: none; border-radius: 8px; font-weight: 600; font-size: 12px; cursor: pointer; background: ${filtro === 'dia' ? '#B45309' : 'transparent'}; color: ${filtro === 'dia' ? 'white' : '#64748B'}; min-height: 36px;">☀️ Día</button>
+        <button class="btn-filtro ${filtro === 'noche' ? 'active' : ''}" data-filtro="noche" style="flex: 1; padding: 8px; border: none; border-radius: 8px; font-weight: 600; font-size: 12px; cursor: pointer; background: ${filtro === 'noche' ? '#0B2A5C' : 'transparent'}; color: ${filtro === 'noche' ? 'white' : '#64748B'}; min-height: 36px;">🌙 Noche</button>
       </div>
 
       <div id="listaTurnos">
         ${turnosFiltrados.length === 0 ? `
-          <div style="background: white; border-radius: 12px; padding: 40px 20px; text-align: center; color: #999; border: 1px solid #e8ecf1;">
+          <div style="background: white; border-radius: 12px; padding: 40px 20px; text-align: center; color: #94A3B8; border: 1px solid #E3E6EE;">
             <div style="font-size: 48px; margin-bottom: 12px;">📋</div>
-            <p style="font-size: 16px; font-weight: 600; color: #666;">No hay turnos guardados</p>
+            <p style="font-size: 16px; font-weight: 600; color: #64748B;">No hay turnos guardados</p>
             <p style="font-size: 14px;">Los turnos aparecerán aquí cuando los cierres</p>
           </div>
         ` : turnosFiltrados.map(turno => `
-          <div class="turno-card" style="background: white; border-radius: 12px; border: 1px solid #e8ecf1; padding: 14px 16px; margin-bottom: 10px; cursor: pointer; transition: all 0.2s; border-left: 4px solid ${turno.turno === 'Día' ? '#f57c00' : '#0d47a1'};">
+          <div class="turno-card" style="background: white; border-radius: 12px; border: 1px solid #E3E6EE; padding: 14px 16px; margin-bottom: 10px; cursor: pointer; transition: all 0.2s; border-left: 4px solid ${turno.turno === 'Día' ? '#B45309' : '#0B2A5C'};">
             <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px;">
               <div style="flex: 1; min-width: 120px;">
                 <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
                   <span style="font-weight: 700; font-size: 15px;">${turno.dependiente || 'Sin nombre'}</span>
-                  <span style="font-size: 11px; padding: 2px 10px; border-radius: 12px; background: ${turno.turno === 'Día' ? '#fff3e0' : '#e3f2fd'}; color: ${turno.turno === 'Día' ? '#e65100' : '#0d47a1'}; font-weight: 600;">${turno.turno === 'Día' ? '☀️ Día' : '🌙 Noche'}</span>
+                  <span style="font-size: 11px; padding: 2px 10px; border-radius: 12px; background: ${turno.turno === 'Día' ? '#FDF3E3' : '#E7EEF7'}; color: ${turno.turno === 'Día' ? '#B45309' : '#0B2A5C'}; font-weight: 600;">${turno.turno === 'Día' ? '☀️ Día' : '🌙 Noche'}</span>
                 </div>
-                <div style="font-size: 13px; color: #666; margin-top: 4px;">📅 ${new Date(turno.fecha).toLocaleDateString('es-CU')} ${new Date(turno.fecha).toLocaleTimeString('es-CU', {hour: '2-digit', minute:'2-digit'})}</div>
+                <div style="font-size: 13px; color: #64748B; margin-top: 4px;">📅 ${new Date(turno.fecha).toLocaleDateString('es-CU')} ${new Date(turno.fecha).toLocaleTimeString('es-CU', {hour: '2-digit', minute:'2-digit'})}</div>
               </div>
               <div style="text-align: right;">
-                <div style="font-size: 18px; font-weight: 700; color: #1a237e;">$${turno.totalVentas || 0}</div>
-                <div style="font-size: 11px; color: #999;">${turno.productos?.length || 0} productos</div>
+                <div style="font-size: 18px; font-weight: 700; color: #16213E;">$${turno.totalVentas || 0}</div>
+                <div style="font-size: 11px; color: #94A3B8;">${turno.productos?.length || 0} productos</div>
               </div>
             </div>
             <div style="display: flex; gap: 6px; margin-top: 10px;">
-              <button class="btn-ver-detalle" data-id="${turno.id}" style="flex: 1; padding: 6px; background: #e8eaf6; color: #1a237e; border: none; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 600;">📊 Ver Detalle</button>
-              <button class="btn-eliminar-turno" data-id="${turno.id}" style="padding: 6px 12px; background: #fef2f2; color: #dc2626; border: none; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 600;">🗑️</button>
+              <button class="btn-ver-detalle" data-id="${turno.id}" style="flex: 1; padding: 6px; background: #E7EAF5; color: #16213E; border: none; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 600;">📊 Ver Detalle</button>
+              <button class="btn-eliminar-turno" data-id="${turno.id}" style="padding: 6px 12px; background: #FBEAEA; color: #9B2C2C; border: none; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 600;">🗑️</button>
             </div>
           </div>
         `).join('')}
       </div>
 
       ${turnosFiltrados.length > 0 ? `
-        <button id="btnEliminarTodos" style="width: 100%; padding: 12px; background: #fef2f2; color: #dc2626; border: 2px solid #fecaca; border-radius: 10px; font-weight: 600; font-size: 14px; cursor: pointer; margin-top: 6px; min-height: 44px;">🗑️ Eliminar Todos los Turnos</button>
+        <button id="btnEliminarTodos" style="width: 100%; padding: 12px; background: #FBEAEA; color: #9B2C2C; border: 2px solid #EFC3C3; border-radius: 10px; font-weight: 600; font-size: 14px; cursor: pointer; margin-top: 6px; min-height: 44px;">🗑️ Eliminar Todos los Turnos</button>
       ` : ''}
     </div>
   `;
@@ -141,30 +141,30 @@ function mostrarDetalleTurno(turno) {
 
   overlay.innerHTML = `
     <div style="background: white; border-radius: 16px; max-width: 400px; width: 100%; max-height: 80vh; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.3);">
-      <div style="padding: 16px 20px; border-bottom: 1px solid #e8ecf1; display: flex; justify-content: space-between; align-items: center;">
+      <div style="padding: 16px 20px; border-bottom: 1px solid #E3E6EE; display: flex; justify-content: space-between; align-items: center;">
         <div>
           <h3 style="margin: 0; font-size: 17px;">📊 Detalle del Turno</h3>
-          <p style="margin: 2px 0 0; font-size: 13px; color: #666;">${turno.dependiente || 'Sin nombre'} • ${turno.turno === 'Día' ? '☀️ Día' : '🌙 Noche'}</p>
+          <p style="margin: 2px 0 0; font-size: 13px; color: #64748B;">${turno.dependiente || 'Sin nombre'} • ${turno.turno === 'Día' ? '☀️ Día' : '🌙 Noche'}</p>
         </div>
-        <button id="btnCerrarDetalle" style="background: none; border: none; font-size: 24px; cursor: pointer; color: #666;">✖</button>
+        <button id="btnCerrarDetalle" style="background: none; border: none; font-size: 24px; cursor: pointer; color: #64748B;">✖</button>
       </div>
       
       <div style="padding: 16px 20px; overflow-y: auto; max-height: calc(80vh - 120px);">
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 16px;">
-          <div style="background: #f5f5f5; padding: 10px; border-radius: 8px; text-align: center;">
-            <div style="font-size: 11px; color: #666;">📅 Fecha</div>
+          <div style="background: #F1F2F6; padding: 10px; border-radius: 8px; text-align: center;">
+            <div style="font-size: 11px; color: #64748B;">📅 Fecha</div>
             <div style="font-weight: 600; font-size: 14px;">${new Date(turno.fecha).toLocaleDateString('es-CU')}</div>
           </div>
-          <div style="background: #f5f5f5; padding: 10px; border-radius: 8px; text-align: center;">
-            <div style="font-size: 11px; color: #666;">💰 Total</div>
-            <div style="font-weight: 700; font-size: 18px; color: #1a237e;">$${turno.totalVentas || 0}</div>
+          <div style="background: #F1F2F6; padding: 10px; border-radius: 8px; text-align: center;">
+            <div style="font-size: 11px; color: #64748B;">💰 Total</div>
+            <div style="font-weight: 700; font-size: 18px; color: #16213E;">$${turno.totalVentas || 0}</div>
           </div>
-          <div style="background: #f5f5f5; padding: 10px; border-radius: 8px; text-align: center;">
-            <div style="font-size: 11px; color: #666;">💵 Efectivo</div>
+          <div style="background: #F1F2F6; padding: 10px; border-radius: 8px; text-align: center;">
+            <div style="font-size: 11px; color: #64748B;">💵 Efectivo</div>
             <div style="font-weight: 600; font-size: 14px;">$${turno.efectivo || 0}</div>
           </div>
-          <div style="background: #f5f5f5; padding: 10px; border-radius: 8px; text-align: center;">
-            <div style="font-size: 11px; color: #666;">📱 Transferencias</div>
+          <div style="background: #F1F2F6; padding: 10px; border-radius: 8px; text-align: center;">
+            <div style="font-size: 11px; color: #64748B;">📱 Transferencias</div>
             <div style="font-weight: 600; font-size: 14px;">$${turno.transferencia || 0}</div>
           </div>
         </div>
@@ -173,18 +173,18 @@ function mostrarDetalleTurno(turno) {
           <div style="margin-bottom: 12px;">
             <h4 style="font-size: 14px; margin: 0 0 8px 0;">🛍️ Productos vendidos</h4>
             ${turno.productos.map(p => `
-              <div style="display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f0f0f0; font-size: 13px;">
+              <div style="display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #EDEFF3; font-size: 13px;">
                 <span>${p.nombre || 'Producto'}</span>
-                <span style="color: #1a237e; font-weight: 600;">${p.vendido} x $${p.precio} = $${p.vendido * p.precio}</span>
+                <span style="color: #16213E; font-weight: 600;">${p.vendido} x $${p.precio} = $${p.vendido * p.precio}</span>
               </div>
             `).join('')}
           </div>
         ` : `
-          <div style="padding: 12px; text-align: center; color: #999; font-size: 14px;">No hay productos registrados en este turno</div>
+          <div style="padding: 12px; text-align: center; color: #94A3B8; font-size: 14px;">No hay productos registrados en este turno</div>
         `}
 
-        <div style="margin-top: 12px; padding: 10px; background: ${turno.estado === 'cerrado' ? '#e8f5e9' : '#fff3e0'}; border-radius: 8px; border: 1px solid ${turno.estado === 'cerrado' ? '#a5d6a7' : '#ffcc80'}; text-align: center;">
-          <span style="font-weight: 600; color: ${turno.estado === 'cerrado' ? '#2e7d32' : '#e65100'};">
+        <div style="margin-top: 12px; padding: 10px; background: ${turno.estado === 'cerrado' ? '#E7F3EC' : '#FDF3E3'}; border-radius: 8px; border: 1px solid ${turno.estado === 'cerrado' ? '#A9CBB6' : '#E9C88A'}; text-align: center;">
+          <span style="font-weight: 600; color: ${turno.estado === 'cerrado' ? '#1F6E43' : '#B45309'};">
             ${turno.estado === 'cerrado' ? '✅ Turno cerrado' : '🟡 Turno abierto'}
           </span>
         </div>
@@ -231,7 +231,7 @@ function mostrarToast(mensaje) {
   if (!toast) {
     toast = document.createElement('div');
     toast.id = 'toast';
-    toast.style.cssText = 'position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #1a2332; color: white; padding: 10px 20px; border-radius: 10px; display: none; font-size: 13px; max-width: 90%; text-align: center; z-index: 1000;';
+    toast.style.cssText = 'position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #1E2433; color: white; padding: 10px 20px; border-radius: 10px; display: none; font-size: 13px; max-width: 90%; text-align: center; z-index: 1000;';
     document.body.appendChild(toast);
   }
   toast.textContent = mensaje;

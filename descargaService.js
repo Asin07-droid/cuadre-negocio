@@ -300,15 +300,15 @@ export function mostrarJSON(datos, titulo = '📄 Datos exportados') {
   
   overlay.innerHTML = `
     <div style="background: white; border-radius: 16px; max-width: 500px; width: 100%; max-height: 80vh; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.4);">
-      <div style="padding: 16px 20px; border-bottom: 1px solid #e8ecf1; display: flex; justify-content: space-between; align-items: center;">
+      <div style="padding: 16px 20px; border-bottom: 1px solid #E3E6EE; display: flex; justify-content: space-between; align-items: center;">
         <h3 style="margin: 0; font-size: 17px;">${titulo}</h3>
-        <button id="btnCerrarJSON" style="background: none; border: none; font-size: 24px; cursor: pointer; color: #666; min-height: 44px; min-width: 44px;">✖</button>
+        <button id="btnCerrarJSON" style="background: none; border: none; font-size: 24px; cursor: pointer; color: #64748B; min-height: 44px; min-width: 44px;">✖</button>
       </div>
       <div style="padding: 16px 20px; overflow-y: auto; max-height: calc(80vh - 120px);">
-        <pre style="background: #f5f5f5; padding: 12px; border-radius: 8px; font-size: 12px; white-space: pre-wrap; word-wrap: break-word; max-height: 300px; overflow-y: auto;">${json}</pre>
+        <pre style="background: #F1F2F6; padding: 12px; border-radius: 8px; font-size: 12px; white-space: pre-wrap; word-wrap: break-word; max-height: 300px; overflow-y: auto;">${json}</pre>
         <div style="display: flex; gap: 8px; margin-top: 12px;">
-          <button id="btnCopiarJSON" style="flex: 1; padding: 10px; background: #1a237e; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; min-height: 44px;">📋 Copiar</button>
-          <button id="btnDescargarJSON" style="flex: 1; padding: 10px; background: #2e7d32; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; min-height: 44px;">💾 Descargar</button>
+          <button id="btnCopiarJSON" style="flex: 1; padding: 10px; background: #16213E; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; min-height: 44px;">📋 Copiar</button>
+          <button id="btnDescargarJSON" style="flex: 1; padding: 10px; background: #1F6E43; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; min-height: 44px;">💾 Descargar</button>
         </div>
       </div>
     </div>

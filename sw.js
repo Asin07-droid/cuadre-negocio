@@ -1,7 +1,7 @@
 // sw.js (en la raíz del proyecto)
 // Service Worker para PWA y offline
 
-const CACHE_NAME = 'cuadre-negocio-v1.5.4';
+const CACHE_NAME = 'cuadre-negocio-v1.5.5';
 const ASSETS = [
   './',
   './index.html',
@@ -18,6 +18,8 @@ const ASSETS = [
   './src/infrastructure/indexeddb/productosRepository.js',
   './src/infrastructure/indexeddb/turnosRepository.js',
   './src/shared/constants/denominaciones.js',
+  './icon-192.png',
+  './icon-512.png',
   './main.css',
   './components.css',
   './logo-app.png',

@@ -11,7 +11,7 @@
   gap: 10px;
   padding: 8px 0 12px 0;
   margin-bottom: 4px;
-  border-bottom: 1px solid #e8ecf1;
+  border-bottom: 1px solid #E3E6EE;
 }
 
 .app-header .logo {
@@ -19,7 +19,7 @@
   height: 40px;
   border-radius: 50%;
   object-fit: cover;
-  background: #f0f0f0;
+  background: #EDEFF3;
   padding: 4px;
   flex-shrink: 0;
 }
@@ -31,13 +31,13 @@
 .app-header .title {
   font-size: 18px;
   font-weight: 700;
-  color: #1a237e;
+  color: #16213E;
   letter-spacing: -0.3px;
 }
 
 .app-header .sub {
   font-size: 11px;
-  color: #8892a0;
+  color: #64748B;
 }
 
 .app-header .licencia-contador {
@@ -45,9 +45,9 @@
   font-weight: 600;
   padding: 4px 12px;
   border-radius: 20px;
-  background: #f5f7fa;
-  color: #666;
-  border: 1px solid #e8ecf1;
+  background: #F3F5F9;
+  color: #64748B;
+  border: 1px solid #E3E6EE;
   white-space: nowrap;
   margin-left: auto;
 }
@@ -107,27 +107,19 @@
 
 /* Colores profesionales */
 .btn-cerrar {
-  background: #c62828;
+  background: #9B2C2C;
 }
 
 .btn-cerrar:hover {
-  background: #b71c1c;
+  background: #7A1F1F;
 }
 
 .btn-nuevo {
-  background: #e65100;
+  background: #B45309;
 }
 
 .btn-nuevo:hover {
-  background: #bf360c;
-}
-
-.btn-pdf {
-  background: #1565c0;
-}
-
-.btn-pdf:hover {
-  background: #0d47a1;
+  background: #8A3D06;
 }
 
 .btn-whatsapp {
@@ -139,11 +131,11 @@
 }
 
 .btn-dev {
-  background: #1a237e;
+  background: #16213E;
 }
 
 .btn-dev:hover {
-  background: #0d47a1;
+  background: #0B2A5C;
 }
 
 /* ============================================
@@ -178,23 +170,23 @@
   /* ← REDUCIDO de 12px */
   border-radius: 12px;
   margin: 10px 0;
-  border: 2px solid #a5d6a7;
-  background: #e8f5e9;
-  color: #1b5e20;
+  border: 2px solid #A9CBB6;
+  background: #E7F3EC;
+  color: #1F6E43;
   box-shadow: 0 2px 8px rgba(27, 94, 32, 0.06);
   transition: 0.3s;
 }
 
 .total.sobra {
-  background: #fff3e0;
-  color: #e65100;
-  border-color: #ffcc80;
+  background: #FDF3E3;
+  color: #B45309;
+  border-color: #E9C88A;
 }
 
 .total.falta {
-  background: #fef2f2;
-  color: #c62828;
-  border-color: #fecaca;
+  background: #FBEAEA;
+  color: #9B2C2C;
+  border-color: #EFC3C3;
 }
 
 /* ============================================
@@ -204,7 +196,7 @@
 .lista-productos {
   background: white;
   border-radius: 12px;
-  border: 1px solid #e8ecf1;
+  border: 1px solid #E3E6EE;
   overflow: hidden;
 }
 
@@ -212,18 +204,18 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr auto;
   padding: 10px 12px;
-  background: #f5f7fa;
+  background: #F3F5F9;
   font-weight: 600;
   font-size: 12px;
-  color: #666;
-  border-bottom: 1px solid #e8ecf1;
+  color: #64748B;
+  border-bottom: 1px solid #E3E6EE;
 }
 
 .lista-productos .item {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr auto;
   padding: 10px 12px;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid #EDEFF3;
   align-items: center;
 }
 
@@ -237,7 +229,7 @@
 }
 
 .lista-productos .item .precio {
-  color: #1a237e;
+  color: #16213E;
   font-weight: 600;
   font-size: 14px;
 }
@@ -265,19 +257,19 @@
 }
 
 .lista-productos .item .acciones .btn-editar {
-  color: #1a237e;
+  color: #16213E;
 }
 
 .lista-productos .item .acciones .btn-editar:hover {
-  background: #e8eaf6;
+  background: #E7EAF5;
 }
 
 .lista-productos .item .acciones .btn-eliminar {
-  color: #c62828;
+  color: #9B2C2C;
 }
 
 .lista-productos .item .acciones .btn-eliminar:hover {
-  background: #fef2f2;
+  background: #FBEAEA;
 }
 
 /* ============================================
@@ -287,12 +279,12 @@
 .turno-card {
   background: white;
   border-radius: 12px;
-  border: 1px solid #e8ecf1;
+  border: 1px solid #E3E6EE;
   padding: 14px 16px;
   margin-bottom: 10px;
   cursor: pointer;
   transition: all 0.2s ease;
-  border-left: 4px solid #1a237e;
+  border-left: 4px solid #16213E;
 }
 
 .turno-card:hover {
@@ -310,7 +302,7 @@
 .turno-card .header .info .dependiente {
   font-weight: 700;
   font-size: 15px;
-  color: #1a2332;
+  color: #1E2433;
 }
 
 .turno-card .header .info .turno-tag {
@@ -321,13 +313,13 @@
 }
 
 .turno-card .header .info .turno-tag.dia {
-  background: #fff3e0;
-  color: #e65100;
+  background: #FDF3E3;
+  color: #B45309;
 }
 
 .turno-card .header .info .turno-tag.noche {
-  background: #e3f2fd;
-  color: #0d47a1;
+  background: #E7EEF7;
+  color: #0B2A5C;
 }
 
 .turno-card .header .total {
@@ -337,12 +329,12 @@
 .turno-card .header .total .monto {
   font-size: 18px;
   font-weight: 700;
-  color: #1a237e;
+  color: #16213E;
 }
 
 .turno-card .header .total .productos {
   font-size: 11px;
-  color: #999;
+  color: #94A3B8;
 }
 
 .turno-card .footer {
@@ -364,21 +356,21 @@
 
 .turno-card .footer .btn-ver {
   flex: 1;
-  background: #e8eaf6;
-  color: #1a237e;
+  background: #E7EAF5;
+  color: #16213E;
 }
 
 .turno-card .footer .btn-ver:hover {
-  background: #c5cae9;
+  background: #C9D1EA;
 }
 
 .turno-card .footer .btn-eliminar {
-  background: #fef2f2;
-  color: #c62828;
+  background: #FBEAEA;
+  color: #9B2C2C;
 }
 
 .turno-card .footer .btn-eliminar:hover {
-  background: #fecaca;
+  background: #EFC3C3;
 }
 
 /* ============================================
@@ -389,7 +381,7 @@
   display: flex;
   gap: 6px;
   margin-bottom: 12px;
-  background: #f5f7fa;
+  background: #F3F5F9;
   padding: 4px;
   border-radius: 10px;
 }
@@ -405,12 +397,12 @@
   min-height: 36px;
   transition: all 0.2s ease;
   background: transparent;
-  color: #666;
+  color: #64748B;
 }
 
 .filtros button.active {
   background: white;
-  color: #1a237e;
+  color: #16213E;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
@@ -423,8 +415,8 @@
   border-radius: 12px;
   padding: 40px 20px;
   text-align: center;
-  color: #999;
-  border: 1px solid #e8ecf1;
+  color: #94A3B8;
+  border: 1px solid #E3E6EE;
 }
 
 .empty-state .icon {
@@ -435,12 +427,12 @@
 .empty-state .title {
   font-size: 16px;
   font-weight: 600;
-  color: #666;
+  color: #64748B;
 }
 
 .empty-state .sub {
   font-size: 14px;
-  color: #999;
+  color: #94A3B8;
 }
 
 /* ============================================
@@ -468,27 +460,27 @@
 }
 
 .toast-notificacion.success {
-  background: #e8f5e9;
-  color: #1b5e20;
-  border: 2px solid #a5d6a7;
+  background: #E7F3EC;
+  color: #1F6E43;
+  border: 2px solid #A9CBB6;
 }
 
 .toast-notificacion.error {
-  background: #fef2f2;
-  color: #c62828;
-  border: 2px solid #fecaca;
+  background: #FBEAEA;
+  color: #9B2C2C;
+  border: 2px solid #EFC3C3;
 }
 
 .toast-notificacion.warning {
-  background: #fff3e0;
-  color: #e65100;
-  border: 2px solid #ffcc80;
+  background: #FDF3E3;
+  color: #B45309;
+  border: 2px solid #E9C88A;
 }
 
 .toast-notificacion.info {
-  background: #e3f2fd;
-  color: #0d47a1;
-  border: 2px solid #90caf9;
+  background: #E7EEF7;
+  color: #0B2A5C;
+  border: 2px solid #9FB8E8;
 }
 
 .toast-notificacion .icono {
@@ -536,13 +528,13 @@
 
 .modal-box .modal-header {
   padding: 20px 20px 16px;
-  border-bottom: 1px solid #e8ecf1;
+  border-bottom: 1px solid #E3E6EE;
 }
 
 .modal-box .modal-header h3 {
   margin: 0;
   font-size: 18px;
-  color: #1a237e;
+  color: #16213E;
 }
 
 .modal-box .modal-body {
@@ -552,14 +544,14 @@
 .modal-box .modal-body label {
   display: block;
   font-size: 13px;
-  color: #666;
+  color: #64748B;
   margin-bottom: 4px;
 }
 
 .modal-box .modal-body input {
   width: 100%;
   padding: 12px 14px;
-  border: 1px solid #e0e0e0;
+  border: 1px solid #DCE0E8;
   border-radius: 8px;
   font-size: 14px;
   min-height: 44px;
@@ -568,7 +560,7 @@
 }
 
 .modal-box .modal-body input:focus {
-  border-color: #1a237e;
+  border-color: #16213E;
   outline: none;
   box-shadow: 0 0 0 3px rgba(26, 35, 126, 0.06);
 }
@@ -592,12 +584,12 @@
 }
 
 .modal-box .modal-footer .btn-cancelar {
-  background: #e8ecf1;
-  color: #333;
+  background: #E3E6EE;
+  color: #1E2433;
 }
 
 .modal-box .modal-footer .btn-guardar {
-  background: linear-gradient(135deg, #1a237e, #0d47a1);
+  background: linear-gradient(135deg, #16213E, #0B2A5C);
   color: white;
   flex: 2;
 }

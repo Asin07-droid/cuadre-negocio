@@ -3,12 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Cuadre de Negocio V1.5</title>
+    <title>Cuadre Negocio v1.5</title>
     
     <!-- PWA - Icono de la app -->
     <link rel="manifest" href="manifest.json">
     <link rel="apple-touch-icon" href="logo-app.png">
-    <meta name="theme-color" content="#1a237e">
+    <meta name="theme-color" content="#16213E">
+
+    <!-- Precarga del logo del splash, para que se vea de inmediato sin parpadeo -->
+    <link rel="preload" as="image" href="logo-tecnoroutev.png">
     
     <!-- Estilos -->
     <link rel="stylesheet" href="main.css">
@@ -29,6 +32,17 @@
     </script>
 </head>
 <body>
+    <!-- Splash estático: aparece de inmediato al parsear el HTML, sin esperar a que
+         cargue ni se ejecute app.js. app.js reemplaza este mismo elemento (#splash)
+         por su versión con el spinner en cuanto arranca, de forma invisible. -->
+    <div id="splash" style="position:fixed;top:0;left:0;width:100%;height:100%;background:#ffffff;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;">
+      <div style="width:130px;height:130px;border-radius:50%;border:4px solid #16213E;display:flex;align-items:center;justify-content:center;margin-bottom:20px;background:#EDEFF3;">
+        <img src="logo-tecnoroutev.png" alt="TecnoRouteV" style="width:110px;height:110px;border-radius:50%;object-fit:cover;">
+      </div>
+      <h1 style="color:#16213E;font-size:24px;font-weight:700;margin:0;">Cuadre de Negocio</h1>
+      <p style="color:#16213E;font-size:14px;margin-top:4px;opacity:0.7;">Versión 1.5</p>
+    </div>
+
     <div id="app">
         <div id="app-content"></div>
         

@@ -16,8 +16,8 @@ html,
 body {
   height: 100%;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-  background: #f5f7fa;
-  color: #1a2332;
+  background: #F3F5F9;
+  color: #1E2433;
   overflow-x: hidden;
 }
 
@@ -26,14 +26,14 @@ body {
   margin: 0 auto;
   padding: 0 0 80px 0;
   min-height: 100vh;
-  background: #f5f7fa;
+  background: #F3F5F9;
 }
 
 #app-content {
   padding: 12px 12px 80px 12px;
   min-height: calc(100vh - 80px);
-  background: #f5f7fa;
-  color: #1a2332;
+  background: #F3F5F9;
+  color: #1E2433;
   overflow-x: hidden;
   max-width: 100%;
 }
@@ -61,26 +61,26 @@ body {
 .input-field {
   width: 100%;
   padding: 18px 20px;
-  border: 2px solid #e2e8f0;
+  border: 2px solid #DCE0E8;
   border-radius: 14px;
   font-size: 18px;
   margin-bottom: 16px;
   transition: all 0.3s ease;
   background: #ffffff;
-  color: #1a2332;
+  color: #1E2433;
   min-height: 60px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
 }
 
 .input-field:focus {
-  border-color: #1a237e;
+  border-color: #16213E;
   background: #ffffff;
   outline: none;
   box-shadow: 0 0 0 4px rgba(26, 35, 126, 0.08);
 }
 
 .input-field::placeholder {
-  color: #a0aec0;
+  color: #94A3B8;
   font-size: 16px;
 }
 
@@ -107,96 +107,8 @@ button:active {
   transform: scale(0.97);
 }
 
-.btn-action {
-  padding: 6px 4px;
-  border: none;
-  border-radius: 8px;
-  font-weight: 600;
-  font-size: 10px;
-  cursor: pointer;
-  min-height: 32px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
-  transition: all 0.2s ease;
-  line-height: 1.1;
-  width: 100%;
-  color: white;
-  letter-spacing: 0.3px;
-}
-
-.btn-action .icon {
-  font-size: 14px;
-  line-height: 1;
-}
-
-.btn-action .label {
-  font-size: 9px;
-  font-weight: 700;
-  line-height: 1.1;
-  margin-top: 1px;
-}
-
-.btn-action .sub {
-  font-size: 7px;
-  font-weight: 400;
-  opacity: 0.8;
-  line-height: 1;
-  margin-top: 0px;
-}
-
-.btn-action:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-}
-
-.btn-action:active {
-  transform: scale(0.96);
-}
-
-/* Colores profesionales */
-.btn-cerrar {
-  background: #c62828;
-}
-
-.btn-cerrar:hover {
-  background: #b71c1c;
-}
-
-.btn-nuevo {
-  background: #e65100;
-}
-
-.btn-nuevo:hover {
-  background: #bf360c;
-}
-
-.btn-pdf {
-  background: #1565c0;
-}
-
-.btn-pdf:hover {
-  background: #0d47a1;
-}
-
-.btn-whatsapp {
-  background: #25D366;
-}
-
-.btn-whatsapp:hover {
-  background: #128C7E;
-}
-
-.btn-dev {
-  background: #1a237e;
-}
-
-.btn-dev:hover {
-  background: #0d47a1;
-}
+/* Los estilos de .btn-action y sus variantes de color viven en components.css
+   (se cargaba una copia duplicada aquí que quedaba sombreada de todos modos) */
 
 /* ============================================
    BOTÓN PRINCIPAL (AGREGAR PRODUCTO)
@@ -205,7 +117,7 @@ button:active {
 .btn-primary {
   width: 100%;
   padding: 14px;
-  background: linear-gradient(135deg, #1a237e, #0d47a1);
+  background: linear-gradient(135deg, #16213E, #0B2A5C);
   color: white;
   border: none;
   border-radius: 12px;
@@ -230,8 +142,8 @@ button:active {
   flex-wrap: wrap;
   gap: 6px;
   padding: 10px 10px;
-  background: #f8fafc;
-  border-bottom: 1px solid #e8ecf1;
+  background: #F6F7FA;
+  border-bottom: 1px solid #E3E6EE;
   align-items: center;
   border-radius: 8px;
   margin-bottom: 6px;
@@ -246,7 +158,7 @@ button:active {
   display: block;
   font-size: 9px;
   font-weight: 600;
-  color: #718096;
+  color: #64748B;
   text-transform: uppercase;
   letter-spacing: 0.3px;
   padding-left: 2px;
@@ -256,17 +168,17 @@ button:active {
 .producto-row .campo input {
   width: 100%;
   padding: 8px 8px;
-  border: 1px solid #e0e0e0;
+  border: 1px solid #DCE0E8;
   border-radius: 6px;
   font-size: 14px;
   background: white;
-  color: #1a2332;
+  color: #1E2433;
   min-height: 40px;
   transition: all 0.2s ease;
 }
 
 .producto-row .campo input:focus {
-  border-color: #1a237e;
+  border-color: #16213E;
   outline: none;
   box-shadow: 0 0 0 3px rgba(26, 35, 126, 0.06);
 }
@@ -274,7 +186,7 @@ button:active {
 .btn-eliminar {
   background: none;
   border: none;
-  color: #c62828;
+  color: #9B2C2C;
   font-size: 18px;
   cursor: pointer;
   padding: 4px 6px;
@@ -288,7 +200,7 @@ button:active {
 }
 
 .btn-eliminar:hover {
-  background: #fef2f2;
+  background: #FBEAEA;
 }
 
 /* ============================================
@@ -307,9 +219,9 @@ button:active {
   align-items: center;
   gap: 4px;
   padding: 6px 8px;
-  background: #f8fafc;
+  background: #F6F7FA;
   border-radius: 6px;
-  border: 1px solid #e8ecf1;
+  border: 1px solid #E3E6EE;
   min-width: 0;
 }
 
@@ -317,19 +229,19 @@ button:active {
   font-weight: 700;
   font-size: 13px;
   min-width: 38px;
-  color: #1a237e;
+  color: #16213E;
   flex-shrink: 0;
 }
 
 .billete-row input {
   flex: 1;
   padding: 6px 4px;
-  border: 1px solid #e0e0e0;
+  border: 1px solid #DCE0E8;
   border-radius: 4px;
   text-align: center;
   font-size: 14px;
   background: white;
-  color: #1a2332;
+  color: #1E2433;
   min-height: 34px;
   min-width: 32px;
   max-width: 70px;
@@ -337,7 +249,7 @@ button:active {
 }
 
 .billete-row input:focus {
-  border-color: #1a237e;
+  border-color: #16213E;
   outline: none;
   box-shadow: 0 0 0 3px rgba(26, 35, 126, 0.06);
 }
@@ -347,7 +259,7 @@ button:active {
   font-size: 12px;
   min-width: 38px;
   text-align: right;
-  color: #2e7d32;
+  color: #1F6E43;
   flex-shrink: 0;
 }
 
@@ -360,9 +272,9 @@ button:active {
   align-items: center;
   gap: 8px;
   padding: 10px 12px;
-  background: #e8f0fe;
+  background: #E7EAF5;
   border-radius: 8px;
-  border: 1px solid #c5cae9;
+  border: 1px solid #C9D1EA;
   margin-top: 6px;
   flex-wrap: wrap;
 }
@@ -371,25 +283,25 @@ button:active {
   font-weight: 700;
   font-size: 15px;
   min-width: 60px;
-  color: #1a237e;
+  color: #16213E;
 }
 
 .transferencia-row input {
   flex: 1;
   padding: 10px 10px;
-  border: 1px solid #c5cae9;
+  border: 1px solid #C9D1EA;
   border-radius: 6px;
   text-align: center;
   font-size: 15px;
   background: white;
-  color: #1a2332;
+  color: #1E2433;
   min-height: 42px;
   min-width: 60px;
   transition: all 0.2s ease;
 }
 
 .transferencia-row input:focus {
-  border-color: #1a237e;
+  border-color: #16213E;
   outline: none;
 }
 
@@ -398,7 +310,7 @@ button:active {
   font-size: 15px;
   min-width: 60px;
   text-align: right;
-  color: #0d47a1;
+  color: #0B2A5C;
 }
 
 /* ============================================
@@ -408,24 +320,24 @@ button:active {
 .totales {
   margin-top: 8px;
   padding: 10px 14px;
-  background: #e8eaf6;
+  background: #E7EAF5;
   border-radius: 10px;
   display: flex;
   justify-content: space-between;
   font-weight: 700;
   font-size: 15px;
-  color: #1a237e;
+  color: #16213E;
 }
 
 .totales .monto {
   font-size: 17px;
-  color: #2e7d32;
+  color: #1F6E43;
 }
 
 .total-general {
   margin-top: 6px;
   padding: 12px 14px;
-  background: linear-gradient(135deg, #1a237e, #0d47a1);
+  background: linear-gradient(135deg, #16213E, #0B2A5C);
   border-radius: 10px;
   display: flex;
   justify-content: space-between;
@@ -437,7 +349,7 @@ button:active {
 
 .total-general .monto {
   font-size: 20px;
-  color: #90caf9;
+  color: #9FB8E8;
 }
 
 /* ============================================
@@ -451,23 +363,23 @@ button:active {
   padding: 12px;
   border-radius: 12px;
   margin: 10px 0;
-  border: 2px solid #a5d6a7;
-  background: #e8f5e9;
-  color: #1b5e20;
+  border: 2px solid #A9CBB6;
+  background: #E7F3EC;
+  color: #1F6E43;
   box-shadow: 0 2px 8px rgba(27, 94, 32, 0.06);
   transition: 0.3s;
 }
 
 .total.sobra {
-  background: #fff3e0;
-  color: #e65100;
-  border-color: #ffcc80;
+  background: #FDF3E3;
+  color: #B45309;
+  border-color: #E9C88A;
 }
 
 .total.falta {
-  background: #fef2f2;
-  color: #c62828;
-  border-color: #fecaca;
+  background: #FBEAEA;
+  color: #9B2C2C;
+  border-color: #EFC3C3;
 }
 
 /* ============================================
@@ -476,9 +388,9 @@ button:active {
 
 .comparador {
   padding: 14px;
-  background: #f8fafc;
+  background: #F6F7FA;
   border-radius: 12px;
-  border: 2px solid #e8ecf1;
+  border: 2px solid #E3E6EE;
   display: block;
   margin: 8px 0;
   font-size: 14px;
@@ -488,7 +400,7 @@ button:active {
   display: flex;
   justify-content: space-between;
   padding: 6px 0;
-  border-bottom: 1px solid #e8ecf1;
+  border-bottom: 1px solid #E3E6EE;
 }
 
 .comparador .fila:last-child {
@@ -496,13 +408,13 @@ button:active {
 }
 
 .comparador .fila .label {
-  color: #555;
+  color: #64748B;
   font-weight: 500;
 }
 
 .comparador .fila .valor {
   font-weight: 700;
-  color: #1a2332;
+  color: #1E2433;
 }
 
 .comparador .resultado {
@@ -520,21 +432,21 @@ button:active {
 }
 
 .comparador .resultado.sobra {
-  background: #fff3e0;
-  color: #e65100;
-  border-color: #ffcc80;
+  background: #FDF3E3;
+  color: #B45309;
+  border-color: #E9C88A;
 }
 
 .comparador .resultado.falta {
-  background: #fef2f2;
-  color: #c62828;
-  border-color: #fecaca;
+  background: #FBEAEA;
+  color: #9B2C2C;
+  border-color: #EFC3C3;
 }
 
 .comparador .resultado.exacto {
-  background: #e8f5e9;
-  color: #1b5e20;
-  border-color: #a5d6a7;
+  background: #E7F3EC;
+  color: #1F6E43;
+  border-color: #A9CBB6;
 }
 
 /* ============================================
@@ -550,7 +462,7 @@ button:active {
   display: flex;
   justify-content: space-around;
   padding: 6px 0 12px;
-  border-top: 1px solid #e8ecf1;
+  border-top: 1px solid #E3E6EE;
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.04);
   z-index: 100;
   max-width: 500px;
@@ -562,7 +474,7 @@ button:active {
   flex-direction: column;
   align-items: center;
   font-size: 10px;
-  color: #8892a0;
+  color: #64748B;
   cursor: pointer;
   padding: 4px 8px;
   border: none;
@@ -580,7 +492,7 @@ button:active {
 }
 
 .nav-item.active {
-  color: #1a237e;
+  color: #16213E;
   font-weight: 600;
 }
 
@@ -597,21 +509,21 @@ button:active {
 .turno-selector button {
   flex: 1;
   padding: 10px;
-  border: 2px solid #e8ecf1;
+  border: 2px solid #E3E6EE;
   border-radius: 10px;
   background: #ffffff;
   font-weight: 600;
   font-size: 14px;
-  color: #666;
+  color: #64748B;
   cursor: pointer;
   transition: all 0.2s ease;
   min-height: 44px;
 }
 
 .turno-selector button.active {
-  border-color: #1a237e;
-  background: #e8eaf6;
-  color: #1a237e;
+  border-color: #16213E;
+  background: #E7EAF5;
+  color: #16213E;
   box-shadow: 0 2px 8px rgba(26, 35, 126, 0.06);
 }
 
@@ -623,7 +535,7 @@ button:active {
   position: relative;
   overflow: hidden;
   border-radius: 12px;
-  border: 1px solid #e8ecf1;
+  border: 1px solid #E3E6EE;
   background: white;
   touch-action: pan-y;
   margin-bottom: 12px;
@@ -631,8 +543,8 @@ button:active {
 
 .tabs-header {
   display: flex;
-  background: #f5f7fa;
-  border-bottom: 1px solid #e8ecf1;
+  background: #F3F5F9;
+  border-bottom: 1px solid #E3E6EE;
 }
 
 .tabs-header button {
@@ -642,7 +554,7 @@ button:active {
   background: transparent;
   font-weight: 700;
   font-size: 14px;
-  color: #8892a0;
+  color: #64748B;
   cursor: pointer;
   transition: 0.2s;
   border-bottom: 3px solid transparent;
@@ -650,8 +562,8 @@ button:active {
 }
 
 .tabs-header button.active {
-  color: #1a237e;
-  border-bottom-color: #1a237e;
+  color: #16213E;
+  border-bottom-color: #16213E;
   background: white;
 }
 

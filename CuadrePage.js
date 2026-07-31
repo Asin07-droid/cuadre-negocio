@@ -69,7 +69,7 @@ export async function renderCuadrePage() {
 
       <!-- TÍTULO Y TURNO -->
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-        <h1 style="color: #1a237e; font-size: 20px; margin: 0;">📊 Cuadre Diario</h1>
+        <h1 style="color: #16213E; font-size: 20px; margin: 0;">📊 Cuadre Diario</h1>
         <div class="turno-selector">
           <button class="btn-turno ${turnoActual === 'Día' ? 'active' : ''}" data-turno="Día">☀️ Día</button>
           <button class="btn-turno ${turnoActual === 'Noche' ? 'active' : ''}" data-turno="Noche">🌙 Noche</button>
@@ -88,7 +88,7 @@ export async function renderCuadrePage() {
         <div class="tabs-track" id="tabsTrack">
           <div class="tab-pane" id="paneProductos">
             <div style="display: flex; gap: 6px; margin-bottom: 8px;">
-              <button id="btnCargarInventario" class="btn-primary" style="flex: 1; padding: 10px; font-size: 13px; min-height: 40px; background: #2e7d32;">📦 Cargar del Inventario</button>
+              <button id="btnCargarInventario" class="btn-primary" style="flex: 1; padding: 10px; font-size: 13px; min-height: 40px; background: #1F6E43;">📦 Cargar del Inventario</button>
               <button id="btnAgregarProducto" class="btn-primary" style="flex: 1; padding: 10px; font-size: 13px; min-height: 40px;">➕ Agregar</button>
             </div>
             <div id="productos-container"></div>
@@ -107,9 +107,9 @@ export async function renderCuadrePage() {
         <div class="fila"><span class="label">📊 Total a entregar</span><span class="valor" id="compTotalVentas">$0</span></div>
         <div class="fila"><span class="label">💰 Total en efectivo</span><span class="valor" id="compTotalEfectivo">$0</span></div>
         <div class="fila"><span class="label">📱 Total en transferencias</span><span class="valor" id="compTotalTransferencia">$0</span></div>
-        <div class="fila" style="font-weight: 700; border-top: 2px solid #1a237e; padding-top: 6px;">
+        <div class="fila" style="font-weight: 700; border-top: 2px solid #16213E; padding-top: 6px;">
           <span class="label">💳 Total recibido</span>
-          <span class="valor" style="color: #1a237e;" id="compTotalGeneral">$0</span>
+          <span class="valor" style="color: #16213E;" id="compTotalGeneral">$0</span>
         </div>
         <div class="fila" style="font-weight: 700;">
           <span class="label">📌 Diferencia</span>
@@ -486,7 +486,7 @@ function renderBilletes() {
       <span>💰 Total en efectivo:</span>
       <span class="monto" id="totalEfectivo">$0</span>
     </div>
-    <div class="totales" style="background: #e3f2fd; margin-top: 4px;">
+    <div class="totales" style="background: #E7EEF7; margin-top: 4px;">
       <span>📱 Total transferencias:</span>
       <span class="monto" id="totalTransferencia">$0</span>
     </div>

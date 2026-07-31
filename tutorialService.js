@@ -257,7 +257,7 @@ function agregarEstilosTutorial() {
     .tut-resaltado {
       position: relative !important;
       z-index: 999999 !important;
-      outline: 3px solid #1a237e !important;
+      outline: 3px solid #16213E !important;
       outline-offset: 6px !important;
       box-shadow: 0 0 15px rgba(26, 35, 126, 0.25) !important;
       animation: tutPulso 1.8s ease-in-out infinite !important;
@@ -265,11 +265,11 @@ function agregarEstilosTutorial() {
     
     @keyframes tutPulso {
       0%, 100% {
-        outline-color: #1a237e;
+        outline-color: #16213E;
         box-shadow: 0 0 15px rgba(26, 35, 126, 0.25);
       }
       50% {
-        outline-color: #0d47a1;
+        outline-color: #0B2A5C;
         box-shadow: 0 0 25px rgba(26, 35, 126, 0.4);
       }
     }
@@ -352,14 +352,14 @@ function mostrarPaso() {
 
   tooltip.innerHTML = 
     '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">' +
-      '<span style="font-size:12px;font-weight:700;color:#f57c00;background:#fff3e0;padding:2px 12px;border-radius:20px;">PASO ' + (pasoActual + 1) + '/' + pasos.length + '</span>' +
-      (pasoActual > 0 ? '<button id="tutAtras" style="background:none;border:none;color:#666;font-size:18px;cursor:pointer;padding:0 8px;">←</button>' : '') +
+      '<span style="font-size:12px;font-weight:700;color:#B45309;background:#FDF3E3;padding:2px 12px;border-radius:20px;">PASO ' + (pasoActual + 1) + '/' + pasos.length + '</span>' +
+      (pasoActual > 0 ? '<button id="tutAtras" style="background:none;border:none;color:#64748B;font-size:18px;cursor:pointer;padding:0 8px;">←</button>' : '') +
     '</div>' +
-    '<div style="font-size:18px;font-weight:700;color:#1a237e;margin-bottom:4px;">' + paso.titulo + '</div>' +
-    '<div style="font-size:14px;color:#444;line-height:1.6;margin-bottom:16px;">' + paso.texto + '</div>' +
+    '<div style="font-size:18px;font-weight:700;color:#16213E;margin-bottom:4px;">' + paso.titulo + '</div>' +
+    '<div style="font-size:14px;color:#1E2433;line-height:1.6;margin-bottom:16px;">' + paso.texto + '</div>' +
     '<div style="display:flex;gap:10px;">' +
-      '<button id="tutSaltar" style="flex:1;padding:10px;background:#f0f0f0;border:none;border-radius:10px;font-weight:600;font-size:13px;cursor:pointer;">Saltar</button>' +
-      '<button id="tutSiguiente" style="flex:2;padding:10px;background:#1a237e;color:white;border:none;border-radius:10px;font-weight:700;font-size:13px;cursor:pointer;">' + (esUltimo ? '✅ Entendido' : 'Siguiente →') + '</button>' +
+      '<button id="tutSaltar" style="flex:1;padding:10px;background:#EDEFF3;border:none;border-radius:10px;font-weight:600;font-size:13px;cursor:pointer;">Saltar</button>' +
+      '<button id="tutSiguiente" style="flex:2;padding:10px;background:#16213E;color:white;border:none;border-radius:10px;font-weight:700;font-size:13px;cursor:pointer;">' + (esUltimo ? '✅ Entendido' : 'Siguiente →') + '</button>' +
     '</div>';
 
   document.body.appendChild(tooltip);

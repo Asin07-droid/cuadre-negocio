@@ -8,7 +8,8 @@ import {
   obtenerMensajeLicencia, 
   verificarContrasena, 
   activarLicencia,
-  reiniciarLicencia
+  intentoBloqueadoPorSeguridad,
+  minutosDeBloqueoRestantes
 } from './licenciaService.js';
 import { iniciarTutorial, tutorialYaVisto } from './tutorialService.js';
 import { renderCuadrePage } from './CuadrePage.js';
@@ -38,13 +39,13 @@ function mostrarSplash() {
   `;
   
   splash.innerHTML = `
-    <div style="width: 130px; height: 130px; border-radius: 50%; border: 4px solid #1a237e; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; background: #f0f0f0;">
+    <div style="width: 130px; height: 130px; border-radius: 50%; border: 4px solid #16213E; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; background: #EDEFF3;">
       <img src="logo-tecnoroutev.png" alt="TecnoRouteV" 
            style="width: 110px; height: 110px; border-radius: 50%; object-fit: cover;">
     </div>
-    <h1 style="color: #1a237e; font-size: 24px; font-weight: 700; margin: 0;">Cuadre de Negocio</h1>
-    <p style="color: #1a237e; font-size: 14px; margin-top: 4px; opacity: 0.7;">Versión 1.5</p>
-    <div style="margin-top: 24px; width: 36px; height: 36px; border: 4px solid #e0e0e0; border-top-color: #1a237e; border-radius: 50%; animation: spin 0.8s linear infinite;"></div>
+    <h1 style="color: #16213E; font-size: 24px; font-weight: 700; margin: 0;">Cuadre de Negocio</h1>
+    <p style="color: #16213E; font-size: 14px; margin-top: 4px; opacity: 0.7;">Versión 1.5</p>
+    <div style="margin-top: 24px; width: 36px; height: 36px; border: 4px solid #DCE0E8; border-top-color: #16213E; border-radius: 50%; animation: spin 0.8s linear infinite;"></div>
   `;
   
   document.body.appendChild(splash);
@@ -107,13 +108,13 @@ function agregarEstilosSwipe() {
       position: relative;
     }
     .nav-item:active { transform: scale(0.95); }
-    .nav-item.active { color: #1a237e; font-weight: 600; }
+    .nav-item.active { color: #16213E; font-weight: 600; }
     .nav-item.active::after {
       content: '';
       display: block;
       width: 20px;
       height: 2px;
-      background: #1a237e;
+      background: #16213E;
       margin: 2px auto 0;
       border-radius: 2px;
       animation: fadeInDot 0.2s ease;
@@ -169,6 +170,7 @@ function navegarA(pagina, direccion, esTutorial) {
   var enterClass = direccion === 'left' ? 'page-enter-left' : 'page-enter-right';
   paginaActual = pagina;
   paginas[pagina]();
+  actualizarHeader();
   document.querySelectorAll('.nav-item').forEach(function(el) {
     el.classList.toggle('active', el.dataset.page === pagina);
   });
@@ -261,30 +263,30 @@ function mostrarPantallaBloqueo() {
   
   container.innerHTML = `
     <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 80vh; padding: 20px; max-width: 400px; margin: 0 auto;">
-      <div style="width: 90px; height: 90px; border-radius: 50%; border: 3px solid #1a237e; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; background: #f0f0f0;">
+      <div style="width: 90px; height: 90px; border-radius: 50%; border: 3px solid #16213E; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; background: #EDEFF3;">
         <img src="logo-tecnoroutev.png" alt="TecnoRouteV" style="width: 75px; height: 75px; border-radius: 50%; object-fit: cover;">
       </div>
-      <h1 style="color: #1a237e; font-size: 24px; margin-bottom: 8px; text-align: center;">App Bloqueada</h1>
-      <p style="color: #666; text-align: center; margin-bottom: 24px; font-size: 15px;">
+      <h1 style="color: #16213E; font-size: 24px; margin-bottom: 8px; text-align: center;">App Bloqueada</h1>
+      <p style="color: #64748B; text-align: center; margin-bottom: 24px; font-size: 15px;">
         ${estado.mensaje || 'Tu periodo de prueba ha terminado. Ingresa la contraseña de verificación para continuar.'}
       </p>
-      <div style="background: #f5f5f5; padding: 12px 16px; border-radius: 10px; margin-bottom: 20px; width: 100%; text-align: center;">
-        <span style="font-size: 13px; color: #666;">📅 Periodo de prueba: 3 días</span>
+      <div style="background: #F1F2F6; padding: 12px 16px; border-radius: 10px; margin-bottom: 20px; width: 100%; text-align: center;">
+        <span style="font-size: 13px; color: #64748B;">📅 Periodo de prueba: 3 días</span>
       </div>
       <div style="width: 100%;">
-        <label style="display: block; font-size: 13px; color: #666; margin-bottom: 6px;">Contraseña de verificación</label>
-        <input type="password" id="inputLicencia" placeholder="Ingresa la contraseña" style="width: 100%; padding: 12px 16px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 16px; margin-bottom: 12px; min-height: 48px;">
-        <button id="btnVerificarLicencia" style="width: 100%; padding: 14px; background: linear-gradient(135deg, #1a237e, #0d47a1); color: white; border: none; border-radius: 10px; font-weight: 700; font-size: 16px; cursor: pointer; min-height: 48px;">
+        <label style="display: block; font-size: 13px; color: #64748B; margin-bottom: 6px;">Contraseña de verificación</label>
+        <input type="password" id="inputLicencia" placeholder="Ingresa la contraseña" style="width: 100%; padding: 12px 16px; border: 2px solid #DCE0E8; border-radius: 10px; font-size: 16px; margin-bottom: 12px; min-height: 48px;">
+        <button id="btnVerificarLicencia" style="width: 100%; padding: 14px; background: linear-gradient(135deg, #16213E, #0B2A5C); color: white; border: none; border-radius: 10px; font-weight: 700; font-size: 16px; cursor: pointer; min-height: 48px;">
           🔑 Verificar
         </button>
-        <div id="errorLicencia" style="color: #dc2626; font-size: 13px; min-height: 20px; margin-top: 8px;"></div>
+        <div id="errorLicencia" style="color: #9B2C2C; font-size: 13px; min-height: 20px; margin-top: 8px;"></div>
       </div>
       <div style="margin-top: 20px; width: 100%;">
         <button id="btnContactarDesarrollador" style="width: 100%; padding: 14px; background: #25D366; color: white; border: none; border-radius: 10px; font-weight: 700; font-size: 15px; cursor: pointer; min-height: 48px;">
           💬 Contactar desarrollador
         </button>
       </div>
-      <div style="margin-top: 20px; font-size: 12px; color: #999; text-align: center;">
+      <div style="margin-top: 20px; font-size: 12px; color: #94A3B8; text-align: center;">
         <p style="margin: 0;">¿Problemas? Contacta al desarrollador para renovar tu licencia.</p>
       </div>
     </div>
@@ -299,6 +301,12 @@ function mostrarPantallaBloqueo() {
       error.textContent = '❌ Ingresa la contraseña.';
       return;
     }
+
+    if (intentoBloqueadoPorSeguridad()) {
+      var min = minutosDeBloqueoRestantes();
+      error.textContent = '⏳ Demasiados intentos. Espera ' + min + ' minuto' + (min === 1 ? '' : 's') + ' e inténtalo de nuevo.';
+      return;
+    }
     
     try {
       var valida = await verificarContrasena(contrasena);
@@ -308,6 +316,10 @@ function mostrarPantallaBloqueo() {
         error.textContent = '';
         input.value = '';
         location.reload();
+      } else if (intentoBloqueadoPorSeguridad()) {
+        var minB = minutosDeBloqueoRestantes();
+        error.textContent = '⏳ Demasiados intentos. Espera ' + minB + ' minuto' + (minB === 1 ? '' : 's') + ' e inténtalo de nuevo.';
+        input.value = '';
       } else {
         error.textContent = '❌ Contraseña incorrecta. Intenta de nuevo.';
         input.value = '';
@@ -337,21 +349,12 @@ function mostrarPantallaBloqueo() {
 function actualizarHeader() {
   var estado = obtenerEstadoLicencia();
   var contador = obtenerTextoContador();
-  var headerContador = document.getElementById('licenciaContador');
-  if (!headerContador) {
-    var header = document.querySelector('.app-header');
-    if (header) {
-      headerContador = document.createElement('div');
-      headerContador.id = 'licenciaContador';
-      headerContador.style.cssText = 'font-size:11px;font-weight:600;padding:4px 12px;border-radius:20px;background:' + (estado.estado === 'prueba' ? '#fff3e0' : '#e8f5e9') + ';color:' + (estado.estado === 'prueba' ? '#e65100' : '#2e7d32') + ';border:1px solid ' + (estado.estado === 'prueba' ? '#ffcc80' : '#a5d6a7') + ';margin-left:auto;white-space:nowrap;transition:all 0.3s ease;';
-      header.appendChild(headerContador);
-    }
-  }
+  var headerContador = document.getElementById('licenciaContadorHeader');
   if (headerContador) {
     headerContador.textContent = contador;
-    headerContador.style.background = estado.estado === 'prueba' ? '#fff3e0' : '#e8f5e9';
-    headerContador.style.color = estado.estado === 'prueba' ? '#e65100' : '#2e7d32';
-    headerContador.style.border = '1px solid ' + (estado.estado === 'prueba' ? '#ffcc80' : '#a5d6a7');
+    headerContador.style.background = estado.estado === 'prueba' ? '#FDF3E3' : '#E7F3EC';
+    headerContador.style.color = estado.estado === 'prueba' ? '#B45309' : '#1F6E43';
+    headerContador.style.border = '1px solid ' + (estado.estado === 'prueba' ? '#E9C88A' : '#A9CBB6');
   }
 }
 
@@ -364,8 +367,16 @@ async function initApp() {
   
   agregarEstilosSwipe();
   mostrarSplash();
-  
-  await new Promise(function(resolve) { setTimeout(resolve, 2000); });
+
+  var dbError = null;
+
+  // La base de datos se abre EN PARALELO con el tiempo mínimo del splash,
+  // en vez de esperar el splash y luego abrir la BD (que sumaba los dos tiempos).
+  await Promise.all([
+    new Promise(function(resolve) { setTimeout(resolve, 2000); }),
+    abrirDB().catch(function(e) { dbError = e; })
+  ]);
+
   ocultarSplash();
   
   var estado = obtenerEstadoLicencia();
@@ -373,7 +384,7 @@ async function initApp() {
   console.log('📅 Días restantes:', estado.diasRestantes);
   
   try {
-    await abrirDB();
+    if (dbError) throw dbError;
     console.log('✅ Base de datos conectada');
     
     if (appBloqueada()) {
@@ -435,10 +446,10 @@ async function initApp() {
     console.error('❌ Error al iniciar:', error);
     var container = document.getElementById('app-content');
     container.innerHTML = `
-      <div style="padding:40px 20px;text-align:center;color:#dc2626;">
+      <div style="padding:40px 20px;text-align:center;color:#9B2C2C;">
         <h2>Error al iniciar la aplicación</h2>
         <p>${error.message}</p>
-        <button onclick="location.reload()" style="padding:10px 20px;background:#1a237e;color:white;border:none;border-radius:8px;margin-top:20px;">Reintentar</button>
+        <button onclick="location.reload()" style="padding:10px 20px;background:#16213E;color:white;border:none;border-radius:8px;margin-top:20px;">Reintentar</button>
       </div>
     `;
   }
@@ -450,75 +461,4 @@ async function initApp() {
 
 document.addEventListener('DOMContentLoaded', initApp);
 
-window.licencia = {
-  obtenerEstado: obtenerEstadoLicencia,
-  verificarContrasena: verificarContrasena,
-  activarLicencia: activarLicencia,
-  appBloqueada: appBloqueada,
-  reiniciarLicencia: reiniciarLicencia
-};
-
-window.navegarA = navegarA;
-window.reiniciarLicencia = reiniciarLicencia;
-
 console.log('✅ app.js cargado correctamente');
-
-// ============================================
-// REGISTRAR SERVICE WORKER (OFFLINE)
-// ============================================
-
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function() {
-    navigator.serviceWorker.register('sw.js', { scope: '/' })
-      .then(function(registration) {
-        console.log('✅ Service Worker registrado correctamente');
-        console.log('📌 Scope:', registration.scope);
-      })
-      .catch(function(error) {
-        console.log('❌ Error al registrar Service Worker:', error);
-      });
-  });
-}
-
-// ============================================
-// KEEP ALIVE - MANTENER SERVICE WORKER ACTIVO
-// ============================================
-
-if ('serviceWorker' in navigator) {
-  // Mantener el Service Worker activo enviando un "ping" cada 30 segundos
-  setInterval(function() {
-    navigator.serviceWorker.ready.then(function(registration) {
-      if (registration.active) {
-        registration.active.postMessage({ type: 'KEEP_ALIVE' });
-        console.log('💓 Ping al Service Worker');
-      }
-    }).catch(function() {
-      // Ignorar errores
-    });
-  }, 30000); // Cada 30 segundos
-}
-
-// ============================================
-// RECUPERAR OFFLINE - SI EL SW SE DETIENE
-// ============================================
-
-// Si el Service Worker se detiene, la app intentará registrarlo de nuevo
-if ('serviceWorker' in navigator) {
-  // Verificar cada 10 segundos si el SW sigue activo
-  setInterval(function() {
-    navigator.serviceWorker.getRegistration().then(function(registration) {
-      if (!registration || !registration.active) {
-        console.log('🔄 Service Worker no activo, registrando de nuevo...');
-        navigator.serviceWorker.register('sw.js', { scope: '/' })
-          .then(function() {
-            console.log('✅ Service Worker registrado nuevamente');
-          })
-          .catch(function(error) {
-            console.log('❌ Error al registrar Service Worker:', error);
-          });
-      }
-    }).catch(function() {
-      // Ignorar errores
-    });
-  }, 10000); // Cada 10 segundos
-}
