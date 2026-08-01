@@ -1,7 +1,7 @@
 // sw.js (en la raíz del proyecto)
 // Service Worker para PWA y offline
 
-const CACHE_NAME = 'cuadre-negocio-v1.5.6';
+const CACHE_NAME = 'cuadre-negocio-v1.5.8';
 const ASSETS = [
   './',
   './index.html',
@@ -18,8 +18,6 @@ const ASSETS = [
   './src/infrastructure/indexeddb/productosRepository.js',
   './src/infrastructure/indexeddb/turnosRepository.js',
   './src/shared/constants/denominaciones.js',
-  './icon-192.png',
-  './icon-512.png',
   './main.css',
   './components.css',
   './logo-app.png',
@@ -35,8 +33,14 @@ self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then((cache) => {
-        console.log('✅ Cacheando assets...');
-        return cache.addAll(ASSETS);
+        console.log('✅ Cacheando assets (uno por uno, sin bloquear por fallos individuales)...');
+        return Promise.allSettled(
+          ASSETS.map((url) =>
+            cache.add(url).catch((err) => {
+              console.warn('⚠️ No se pudo cachear:', url, err.message || err);
+            })
+          )
+        );
       })
       .then(() => self.skipWaiting())
       .catch((err) => console.error('❌ Falló el precache:', err))

@@ -1,6 +1,6 @@
 {
-  "name": "Cuadre de Negocio",
-  "short_name": "Cuadre",
+  "name": "Cuadre Negocio v1.5",
+  "short_name": "Cuadre Negocio v1.5",
   "description": "App offline para control de caja en Cuba",
   "start_url": "./index.html",
   "scope": "./",
