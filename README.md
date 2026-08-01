@@ -157,11 +157,8 @@ Activación de Licencia
     El contador de días se actualiza automáticamente
 
 👨‍💻 Desarrollador
-
-TecnoRouteV
-📧 Email: tecnoroutev@gmail.com
-📱 WhatsApp: +53 5277 6644
-🌐 Web: tecnoroutev.com
+Marco Antonio Asin Lopez
+📱 WhatsApp: +53 52776644
 🙏 Agradecimientos
 
     A todos los usuarios que confían en esta herramienta para su negocio
