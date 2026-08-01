@@ -1,7 +1,7 @@
 // sw.js (en la raíz del proyecto)
 // Service Worker para PWA y offline
 
-const CACHE_NAME = 'cuadre-negocio-v1.5.8';
+const CACHE_NAME = 'cuadre-negocio-v1.6.0';
 const ASSETS = [
   './',
   './index.html',
@@ -22,6 +22,8 @@ const ASSETS = [
   './components.css',
   './logo-app.png',
   './logo-tecnoroutev.png',
+  './icon-192.png',
+  './icon-512.png',
 ];
 
 // ============================================
