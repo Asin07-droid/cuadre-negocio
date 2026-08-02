@@ -23,20 +23,20 @@ import {
   notificacionWhatsAppEnviado
 } from './notificacionService.js';
 
-var productos = [];
+let productos = [];
 
 export async function renderInventarioPage() {
-  var container = document.getElementById('app-content');
+  const container = document.getElementById('app-content');
 
   try {
     productos = await obtenerProductos();
-    productos.sort(function(a, b) { return a.nombre.localeCompare(b.nombre); });
+    productos.sort((a, b) => a.nombre.localeCompare(b.nombre));
   } catch (error) {
     console.error('Error al cargar productos:', error);
     productos = [];
   }
 
-  var contadorLicencia = obtenerTextoContador();
+  const contadorLicencia = obtenerTextoContador();
 
   container.innerHTML = `
     <div style="padding: 10px; max-width: 500px; margin: 0 auto;">
@@ -89,7 +89,7 @@ export async function renderInventarioPage() {
               <span>Cantidad</span>
               <span style="text-align: center;">Acciones</span>
             </div>
-            ${productos.map(function(p) { return `
+            ${productos.map(p => `
               <div style="display: grid; grid-template-columns: 1fr 1fr 1fr auto; padding: 10px 12px; border-bottom: 1px solid #EDEFF3; align-items: center;">
                 <span style="font-weight: 500; font-size: 14px;">${p.nombre}</span>
                 <span style="color: #16213E; font-weight: 600; font-size: 14px;">$${p.precio}</span>
@@ -99,7 +99,7 @@ export async function renderInventarioPage() {
                   <button class="btn-eliminar" data-id="${p.id}" style="background: none; border: none; color: #9B2C2C; cursor: pointer; font-size: 16px; padding: 4px; min-height: 36px; min-width: 36px;" title="Eliminar">🗑️</button>
                 </div>
               </div>
-            `; }).join('')}
+            `).join('')}
           </div>
         `}
       </div>
@@ -110,14 +110,14 @@ export async function renderInventarioPage() {
   // EVENTOS
   // ============================================
 
-  document.getElementById('btnAgregarProducto').addEventListener('click', function() { mostrarModalProducto(null); });
+  document.getElementById('btnAgregarProducto').addEventListener('click', () => mostrarModalProducto(null));
   document.getElementById('btnExportarInventario').addEventListener('click', enviarInventarioWhatsApp);
-  document.getElementById('btnImportarInventario').addEventListener('click', function() {
+  document.getElementById('btnImportarInventario').addEventListener('click', () => {
     document.getElementById('modalImportarWhatsApp').style.display = 'block';
     document.getElementById('textoWhatsApp').value = '';
     document.getElementById('textoWhatsApp').focus();
   });
-  document.getElementById('btnCancelarImport').addEventListener('click', function() {
+  document.getElementById('btnCancelarImport').addEventListener('click', () => {
     document.getElementById('modalImportarWhatsApp').style.display = 'none';
   });
   document.getElementById('btnImportarTexto').addEventListener('click', importarDesdeWhatsApp);
@@ -127,21 +127,21 @@ export async function renderInventarioPage() {
     }
   });
 
-  document.querySelectorAll('.btn-editar').forEach(function(btn) {
+  document.querySelectorAll('.btn-editar').forEach(btn => {
     btn.addEventListener('click', function() {
-      var id = parseInt(this.dataset.id);
-      var producto = productos.find(function(p) { return p.id === id; });
+      const id = parseInt(this.dataset.id);
+      const producto = productos.find(p => p.id === id);
       if (producto) {
         mostrarModalProducto(producto);
       }
     });
   });
 
-  document.querySelectorAll('.btn-eliminar').forEach(function(btn) {
+  document.querySelectorAll('.btn-eliminar').forEach(btn => {
     btn.addEventListener('click', function() {
-      var id = parseInt(this.dataset.id);
-      var producto = productos.find(function(p) { return p.id === id; });
-      if (producto && confirm('¿Eliminar "' + producto.nombre + '"?')) {
+      const id = parseInt(this.dataset.id);
+      const producto = productos.find(p => p.id === id);
+      if (producto && confirm(`¿Eliminar "${producto.nombre}"?`)) {
         eliminarProductoHandler(producto);
       }
     });
@@ -149,14 +149,14 @@ export async function renderInventarioPage() {
 }
 
 function mostrarModalProducto(producto) {
-  var esEdicion = producto !== null;
-  var titulo = esEdicion ? '✏️ Editar Producto' : '➕ Agregar Producto';
+  const esEdicion = producto !== null;
+  const titulo = esEdicion ? '✏️ Editar Producto' : '➕ Agregar Producto';
 
-  var nombreDefault = producto ? producto.nombre : '';
-  var precioDefault = producto ? producto.precio : '';
-  var stockDefault = producto ? (producto.stock || 0) : '';
+  const nombreDefault = producto ? producto.nombre : '';
+  const precioDefault = producto ? producto.precio : '';
+  const stockDefault = producto ? (producto.stock || 0) : '';
 
-  var overlay = document.createElement('div');
+  const overlay = document.createElement('div');
   overlay.style.cssText = 'position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: flex; justify-content: center; align-items: center; z-index: 9999; padding: 20px; backdrop-filter: blur(4px);';
 
   overlay.innerHTML = `
@@ -191,15 +191,15 @@ function mostrarModalProducto(producto) {
 
   document.body.appendChild(overlay);
 
-  document.getElementById('btnModalCancelar').addEventListener('click', function() { overlay.remove(); });
-  overlay.addEventListener('click', function(e) {
+  document.getElementById('btnModalCancelar').addEventListener('click', () => overlay.remove());
+  overlay.addEventListener('click', (e) => {
     if (e.target === overlay) overlay.remove();
   });
 
   document.getElementById('btnModalGuardar').addEventListener('click', async function() {
-    var nombre = document.getElementById('modalNombre').value.trim();
-    var precio = parseFloat(document.getElementById('modalPrecio').value);
-    var stock = parseInt(document.getElementById('modalStock').value) || 0;
+    const nombre = document.getElementById('modalNombre').value.trim();
+    const precio = parseFloat(document.getElementById('modalPrecio').value);
+    const stock = parseInt(document.getElementById('modalStock').value) || 0;
 
     if (!nombre) {
       notificacionError('El nombre del producto es obligatorio');
@@ -215,7 +215,7 @@ function mostrarModalProducto(producto) {
 
     try {
       if (esEdicion) {
-        var productoActualizado = {
+        const productoActualizado = {
           id: producto.id,
           nombre: nombre,
           precio: precio,
@@ -224,15 +224,13 @@ function mostrarModalProducto(producto) {
         };
         
         await actualizarProducto(productoActualizado);
-        notificacionExito('"' + nombre + '" actualizado');
+        notificacionExito(`"${nombre}" actualizado`);
         overlay.remove();
         renderInventarioPage();
       } else {
-        var existe = productos.some(function(p) {
-          return p.nombre.toLowerCase() === nombre.toLowerCase();
-        });
+        const existe = productos.some(p => p.nombre.toLowerCase() === nombre.toLowerCase());
         if (existe) {
-          notificacionError('Ya existe "' + nombre + '"');
+          notificacionError(`Ya existe "${nombre}"`);
           return;
         }
         
@@ -242,7 +240,7 @@ function mostrarModalProducto(producto) {
           stock: stock, 
           categoria: 'General' 
         });
-        notificacionExito('"' + nombre + '" agregado');
+        notificacionExito(`"${nombre}" agregado`);
         overlay.remove();
         renderInventarioPage();
       }
@@ -252,23 +250,19 @@ function mostrarModalProducto(producto) {
     }
   });
 
-  overlay.querySelectorAll('input').forEach(function(input) {
-    input.addEventListener('keypress', function(e) {
+  overlay.querySelectorAll('input').forEach(input => {
+    input.addEventListener('keypress', (e) => {
       if (e.key === 'Enter') {
         document.getElementById('btnModalGuardar').click();
       }
     });
   });
 
-  setTimeout(function() {
+  setTimeout(() => {
     document.getElementById('modalNombre').focus();
     document.getElementById('modalNombre').select();
   }, 100);
 }
-
-// ============================================
-// ENVIAR INVENTARIO POR WHATSAPP
-// ============================================
 
 function enviarInventarioWhatsApp() {
   if (productos.length === 0) {
@@ -278,89 +272,43 @@ function enviarInventarioWhatsApp() {
 
   notificacionWhatsAppEnviado();
 
-  var fecha = new Date();
-  var fechaStr = fecha.toLocaleDateString('es-CU') + ' ' + fecha.toLocaleTimeString('es-CU', { hour: '2-digit', minute: '2-digit' });
+  const fecha = new Date();
+  const fechaStr = fecha.toLocaleDateString('es-CU') + ' ' + fecha.toLocaleTimeString('es-CU', { hour: '2-digit', minute: '2-digit' });
 
-  // ============================================
-  // CALCULAR ANCHOS
-  // ============================================
-  var maxNombre = 8;
-  var maxPrecio = 6;
-  var maxStock = 6;
-  
-  productos.forEach(function(p) {
-    var nombreLen = p.nombre.length;
-    var precioLen = String(p.precio).length;
-    var stockLen = String(p.stock || 0).length;
-    
-    if (nombreLen > maxNombre) maxNombre = nombreLen;
-    if (precioLen > maxPrecio) maxPrecio = precioLen;
-    if (stockLen > maxStock) maxStock = stockLen;
-  });
-
-  maxNombre = maxNombre + 1;
-  maxPrecio = maxPrecio + 1;
-  maxStock = maxStock + 1;
-
-  // ============================================
-  // CONSTRUIR TABLA
-  // ============================================
-  var lineas = [];
-  
-  var header = 'Producto';
-  var headerPrecio = 'Precio';
-  var headerStock = 'Cantidad';
-  
-  var separador = '';
-  separador += '-'.repeat(maxNombre + 1) + '|';
-  separador += '-'.repeat(maxPrecio + 1) + '|';
-  separador += '-'.repeat(maxStock + 1);
-  
-  lineas.push(header.padEnd(maxNombre + 1) + '|' + headerPrecio.padEnd(maxPrecio + 1) + '|' + headerStock.padEnd(maxStock + 1));
-  lineas.push(separador);
-  
-  productos.forEach(function(p) {
-    var nombre = p.nombre.padEnd(maxNombre + 1);
-    var precio = ('$' + p.precio).padEnd(maxPrecio + 1);
-    var stock = String(p.stock || 0).padEnd(maxStock + 1);
-    lineas.push(nombre + '|' + precio + '|' + stock);
-  });
-
-  // ============================================
-  // ARMAR MENSAJE
-  // ============================================
-  var mensaje = '';
+  let mensaje = '';
   mensaje += '📦 *INVENTARIO DE PRODUCTOS*\n';
-  mensaje += '📅 *Fecha:* ' + fechaStr + '\n';
-  mensaje += '📦 *Total:* ' + productos.length + ' productos\n';
+  mensaje += `📅 *Fecha:* ${fechaStr}\n`;
+  mensaje += `📦 *Total:* ${productos.length} productos\n`;
   mensaje += '═══════════════════════════════\n\n';
-  mensaje += lineas.join('\n');
-  mensaje += '\n\n═══════════════════════════════\n';
+  mensaje += '*Producto* | *Precio* | *Stock*\n';
+  mensaje += '──────────|─────────|───────\n';
+
+  productos.forEach(p => {
+    mensaje += `${p.nombre} | $${p.precio} | ${p.stock || 0}\n`;
+  });
+
+  mensaje += '\n═══════════════════════════════\n';
   mensaje += '🔹 TecnoRouteV - Cuadre de Negocio V1.5';
 
-  var mensajeCodificado = encodeURIComponent(mensaje);
-  var isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  const mensajeCodificado = encodeURIComponent(mensaje);
+  const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
   
   try {
     if (isMobile) {
-      window.location.href = 'whatsapp://send?text=' + mensajeCodificado;
-      setTimeout(function() { 
-        window.open('https://wa.me/?text=' + mensajeCodificado, '_blank'); 
+      window.location.href = `whatsapp://send?text=${mensajeCodificado}`;
+      setTimeout(() => { 
+        window.open(`https://wa.me/?text=${mensajeCodificado}`, '_blank'); 
       }, 1000);
     } else {
-      window.open('https://wa.me/?text=' + mensajeCodificado, '_blank');
+      window.open(`https://wa.me/?text=${mensajeCodificado}`, '_blank');
     }
   } catch (e) {
-    window.open('https://wa.me/?text=' + mensajeCodificado, '_blank');
+    window.open(`https://wa.me/?text=${mensajeCodificado}`, '_blank');
   }
 }
 
-// ============================================
-// IMPORTAR DESDE WHATSAPP
-// ============================================
-
 async function importarDesdeWhatsApp() {
-  var texto = document.getElementById('textoWhatsApp').value;
+  const texto = document.getElementById('textoWhatsApp').value;
   
   if (!texto || texto.trim() === '') {
     notificacionError('Pega el mensaje de WhatsApp con el inventario');
@@ -368,21 +316,21 @@ async function importarDesdeWhatsApp() {
   }
 
   try {
-    var productosImportados = parsearTextoInventario(texto);
+    const productosImportados = parsearTextoInventario(texto);
 
     if (productosImportados.length === 0) {
       notificacionError('No se encontraron productos válidos en el mensaje');
       return;
     }
 
-    var mensaje = '📦 Se importarán ' + productosImportados.length + ' productos:\n\n';
+    let mensaje = `📦 Se importarán ${productosImportados.length} productos:\n\n`;
     productosImportados.slice(0, 5).forEach(function(p) {
-      mensaje += '  • ' + p.nombre + ': ' + (p.stock || 0) + ' unidades ($' + p.precio + ')\n';
+      mensaje += `  • ${p.nombre}: ${p.stock || 0} unidades ($${p.precio})\n`;
     });
     if (productosImportados.length > 5) {
-      mensaje += '\n  ... y ' + (productosImportados.length - 5) + ' más.';
+      mensaje += `\n  ... y ${productosImportados.length - 5} más.`;
     }
-    mensaje += '\n\n¿Deseas continuar con la importación?';
+    mensaje += `\n\n¿Deseas continuar con la importación?`;
 
     if (!confirm(mensaje)) {
       notificacionImportacionCancelada();
@@ -390,14 +338,12 @@ async function importarDesdeWhatsApp() {
       return;
     }
 
-    var importados = 0;
-    var actualizados = 0;
+    let importados = 0;
+    let actualizados = 0;
 
     for (var j = 0; j < productosImportados.length; j++) {
-      var prod = productosImportados[j];
-      var existente = productos.find(function(p) {
-        return p.nombre.toLowerCase() === prod.nombre.toLowerCase();
-      });
+      const prod = productosImportados[j];
+      const existente = productos.find(p => p.nombre.toLowerCase() === prod.nombre.toLowerCase());
       
       if (existente) {
         existente.precio = prod.precio;
@@ -412,7 +358,7 @@ async function importarDesdeWhatsApp() {
 
     document.getElementById('modalImportarWhatsApp').style.display = 'none';
     notificacionInventarioImportado(importados, actualizados);
-    setTimeout(function() { renderInventarioPage(); }, 500);
+    setTimeout(() => { renderInventarioPage(); }, 500);
 
   } catch (error) {
     console.error('Error al importar desde WhatsApp:', error);
@@ -420,40 +366,45 @@ async function importarDesdeWhatsApp() {
   }
 }
 
-// ============================================
-// PARSEAR TEXTO DE INVENTARIO
-// ============================================
-
 function parsearTextoInventario(texto) {
-  var lineas = texto.split('\n');
-  var productosImportados = [];
-  var enTabla = false;
+  const lineas = texto.split('\n');
+  const productosImportados = [];
+  let enTabla = false;
 
   for (var i = 0; i < lineas.length; i++) {
-    var linea = lineas[i].trim();
+    const linea = lineas[i].trim();
     
     if (!linea) continue;
     
-    if (linea.includes('Producto') && linea.includes('Precio') && linea.includes('Cantidad')) {
+    if (linea.includes('Producto') && linea.includes('Precio') && linea.includes('Stock')) {
       enTabla = true;
       continue;
     }
     
-    if (enTabla && (linea.startsWith('-') || linea.startsWith('═') || linea.startsWith('🔹'))) {
+    if (enTabla && (linea.startsWith('===') || linea.startsWith('---') || linea.startsWith('🔹') || linea.startsWith('═'))) {
       break;
     }
     
     if (enTabla) {
-      var partes = linea.split('|').map(function(s) { return s.trim(); });
-      partes = partes.filter(function(s) { return s.length > 0; });
+      let partes = [];
+      
+      if (linea.includes('|')) {
+        partes = linea.split('|').map(s => s.trim());
+      } else if (linea.includes('\t')) {
+        partes = linea.split('\t').map(s => s.trim());
+      } else {
+        partes = linea.split(/\s{2,}/).map(s => s.trim());
+      }
+      
+      partes = partes.filter(s => s.length > 0);
       
       if (partes.length >= 3) {
-        var nombre = partes[0].trim();
-        var precioStr = partes[1].trim().replace('$', '').trim();
-        var precio = parseFloat(precioStr);
-        var stock = parseInt(partes[2].trim()) || 0;
+        const nombre = partes[0].trim();
+        const precioStr = partes[1].trim().replace('$', '').replace(',', '').trim();
+        const precio = parseFloat(precioStr);
+        const stock = parseInt(partes[2].trim()) || 0;
         
-        if (nombre && !isNaN(precio) && precio > 0 && !nombre.includes('Producto') && !nombre.includes('─')) {
+        if (nombre && !isNaN(precio) && precio > 0 && !nombre.includes('Producto') && !nombre.includes('──────────')) {
           productosImportados.push({
             nombre: nombre,
             precio: precio,
@@ -471,7 +422,7 @@ function parsearTextoInventario(texto) {
 async function eliminarProductoHandler(producto) {
   try {
     await eliminarProducto(producto.id);
-    notificacionExito('"' + producto.nombre + '" eliminado');
+    notificacionExito(`"${producto.nombre}" eliminado`);
     renderInventarioPage();
   } catch (error) {
     console.error('Error al eliminar producto:', error);
