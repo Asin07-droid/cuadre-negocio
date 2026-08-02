@@ -264,6 +264,10 @@ function mostrarModalProducto(producto) {
   }, 100);
 }
 
+// ============================================
+// ENVIAR INVENTARIO POR WHATSAPP - FORMATO CORREGIDO
+// ============================================
+
 function enviarInventarioWhatsApp() {
   if (productos.length === 0) {
     notificacionSinProductos();
@@ -275,19 +279,64 @@ function enviarInventarioWhatsApp() {
   const fecha = new Date();
   const fechaStr = fecha.toLocaleDateString('es-CU') + ' ' + fecha.toLocaleTimeString('es-CU', { hour: '2-digit', minute: '2-digit' });
 
+  // ============================================
+  // CALCULAR ANCHOS DE COLUMNA PARA ALINEAR
+  // ============================================
+  let maxNombre = 10; // Mínimo para "Producto"
+  let maxPrecio = 6;  // Mínimo para "Precio"
+  let maxStock = 6;   // Mínimo para "Cant."
+  
+  productos.forEach(p => {
+    const nombreLen = p.nombre.length;
+    const precioLen = String(p.precio).length;
+    const stockLen = String(p.stock || 0).length;
+    
+    if (nombreLen > maxNombre) maxNombre = nombreLen;
+    if (precioLen > maxPrecio) maxPrecio = precioLen;
+    if (stockLen > maxStock) maxStock = stockLen;
+  });
+
+  // Ajustar anchos mínimos para que la tabla se vea bien
+  if (maxNombre < 12) maxNombre = 12;
+  if (maxPrecio < 8) maxPrecio = 8;
+  if (maxStock < 8) maxStock = 8;
+
+  // ============================================
+  // CONSTRUIR LÍNEAS DE LA TABLA
+  // ============================================
+  let lineas = [];
+  
+  // Encabezado
+  const header = `┌${'─'.repeat(maxNombre + 2)}┬${'─'.repeat(maxPrecio + 2)}┬${'─'.repeat(maxStock + 2)}┐`;
+  const headerRow = `│ ${'Producto'.padEnd(maxNombre)} │ ${'Precio'.padEnd(maxPrecio)} │ ${'Cant.'.padEnd(maxStock)} │`;
+  const separator = `├${'─'.repeat(maxNombre + 2)}┼${'─'.repeat(maxPrecio + 2)}┼${'─'.repeat(maxStock + 2)}┤`;
+  
+  lineas.push(header);
+  lineas.push(headerRow);
+  lineas.push(separator);
+  
+  // Datos
+  productos.forEach(p => {
+    const nombre = p.nombre.padEnd(maxNombre);
+    const precio = `$${p.precio}`.padEnd(maxPrecio);
+    const stock = String(p.stock || 0).padEnd(maxStock);
+    lineas.push(`│ ${nombre} │ ${precio} │ ${stock} │`);
+  });
+  
+  // Pie de tabla
+  const footer = `└${'─'.repeat(maxNombre + 2)}┴${'─'.repeat(maxPrecio + 2)}┴${'─'.repeat(maxStock + 2)}┘`;
+  lineas.push(footer);
+
+  // ============================================
+  // ARMAR MENSAJE COMPLETO
+  // ============================================
   let mensaje = '';
   mensaje += '📦 *INVENTARIO DE PRODUCTOS*\n';
   mensaje += `📅 *Fecha:* ${fechaStr}\n`;
   mensaje += `📦 *Total:* ${productos.length} productos\n`;
   mensaje += '═══════════════════════════════\n\n';
-  mensaje += '*Producto* | *Precio* | *Stock*\n';
-  mensaje += '──────────|─────────|───────\n';
-
-  productos.forEach(p => {
-    mensaje += `${p.nombre} | $${p.precio} | ${p.stock || 0}\n`;
-  });
-
-  mensaje += '\n═══════════════════════════════\n';
+  mensaje += lineas.join('\n');
+  mensaje += '\n\n═══════════════════════════════\n';
   mensaje += '🔹 TecnoRouteV - Cuadre de Negocio V1.5';
 
   const mensajeCodificado = encodeURIComponent(mensaje);

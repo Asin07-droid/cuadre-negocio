@@ -1,6 +1,6 @@
 // HistorialPage.js
 
-import { obtenerTurnos } from './src/infrastructure/indexeddb/turnosRepository.js';
+import { obtenerTurnos, actualizarTurno } from './src/infrastructure/indexeddb/turnosRepository.js';
 import { obtenerTextoContador } from './licenciaService.js';
 
 let turnos = [];
@@ -120,8 +120,11 @@ export async function renderHistorialPage() {
 }
 
 function filtrarTurnos(turnos) {
-  if (filtro === 'todos') return turnos;
-  return turnos.filter(t => t.turno === (filtro === 'dia' ? 'Día' : 'Noche'));
+  // ✅ Filtrar turnos eliminados
+  const activos = turnos.filter(t => t.estado !== 'eliminado');
+  
+  if (filtro === 'todos') return activos;
+  return activos.filter(t => t.turno === (filtro === 'dia' ? 'Día' : 'Noche'));
 }
 
 function mostrarDetalleTurno(turno) {
@@ -200,10 +203,21 @@ function mostrarDetalleTurno(turno) {
   });
 }
 
+// ============================================
+// ELIMINAR TURNO - CORREGIDO
+// ============================================
+
 async function eliminarTurno(turno) {
   try {
-    const { actualizarTurno } = await import('./src/infrastructure/indexeddb/turnosRepository.js');
+    // Actualizar en la base de datos
     await actualizarTurno({ ...turno, estado: 'eliminado' });
+    
+    // Eliminar de la lista en memoria
+    const index = turnos.findIndex(t => t.id === turno.id);
+    if (index !== -1) {
+      turnos.splice(index, 1);
+    }
+    
     mostrarToast('🗑️ Turno eliminado');
     renderHistorialPage();
   } catch (error) {
@@ -212,13 +226,24 @@ async function eliminarTurno(turno) {
   }
 }
 
+// ============================================
+// ELIMINAR TODOS LOS TURNOS - CORREGIDO
+// ============================================
+
 async function eliminarTodosLosTurnos() {
   try {
-    const { actualizarTurno } = await import('./src/infrastructure/indexeddb/turnosRepository.js');
-    for (const turno of turnos) {
-      await actualizarTurno({ ...turno, estado: 'eliminado' });
+    // Obtener solo los turnos activos (no eliminados)
+    const turnosActivos = turnos.filter(t => t.estado !== 'eliminado');
+    
+    // Marcar todos como eliminados en la base de datos
+    for (const t of turnosActivos) {
+      await actualizarTurno({ ...t, estado: 'eliminado' });
     }
-    mostrarToast(`🗑️ ${turnos.length} turnos eliminados`);
+    
+    // Actualizar la lista en memoria (solo quedan los ya eliminados)
+    turnos = turnos.filter(t => t.estado === 'eliminado');
+    
+    mostrarToast(`🗑️ ${turnosActivos.length} turnos eliminados`);
     renderHistorialPage();
   } catch (error) {
     console.error('Error al eliminar turnos:', error);
